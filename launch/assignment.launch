@@ -19,6 +19,7 @@
   <arg name="respawn_gazebo" default="false"/>
   <arg name="use_clock_frequency" default="false"/>
   <arg name="pub_clock_frequency" default="100"/>
+  <arg name="model" default="$(find patrolling_robot)/urdf/rosbot_modified.xacro" />
 
   <!-- set use_sim_time flag -->
   <param name="/use_sim_time" value="$(arg use_sim_time)"/>
@@ -39,13 +40,29 @@
   </group>
   <node name="gazebo" pkg="gazebo_ros" type="$(arg script_type)" respawn="$(arg respawn_gazebo)" output="screen"
 	args="$(arg command_arg1) $(arg command_arg2) $(arg command_arg3) -e $(arg physics) $(arg extra_gazebo_args) $(arg world_name)" />
+
+  <!-- load robot description -->
+  <param name="robot_description" command="$(find xacro)/xacro --inorder $(arg model)" />
+
+  <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" />
 	
   <!-- start gazebo client -->
   <group if="$(arg gui)">
     <node name="gazebo_gui" pkg="gazebo_ros" type="gzclient" respawn="false" output="screen"/>
+    <node name="joint_state_publisher_gui" pkg="joint_state_publisher_gui" type="joint_state_publisher_gui" />
   </group>
-	
-	
-   <node name="marker_server" pkg="patrolling_robot" type="marker_server" />
+
+  <node name="rosbot_spawn" pkg="gazebo_ros" type="spawn_model" respawn="false" output="screen" args="-urdf -model rosbot -param robot_description -z 0.05 -x -6 -y 11.0" />
+
+  <rosparam file="$(find patrolling_robot)/config/move_camera_config.yaml" command="load"/>
+
+  <node name="controller_spawner" pkg="controller_manager" type="spawner" output="screen" args="
+        joint_state_controller
+        pitch_joint_position_controller
+        yawl_joint_position_controller
+        --shutdown-timeout 3">
+    </node>
+
+  <node name="marker_server" pkg="patrolling_robot" type="marker_server" />
 
 </launch>
