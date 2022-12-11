@@ -11,11 +11,19 @@ find_package(catkin REQUIRED COMPONENTS
   roscpp
   rospy
   message_generation
+  cv_bridge
+  image_transport
+  aruco
+  aruco_msgs
+  sensor_msgs
+  visualization_msgs
 )
 
 ## System dependencies are found with CMake's conventions
 # find_package(Boost REQUIRED COMPONENTS system)
-
+find_package (OpenCV REQUIRED)
+find_package(aruco REQUIRED)
+find_package(OpenCV REQUIRED)
 
 ## Uncomment this if the package has a setup.py. This macro ensures
 ## modules and global scripts declared therein get installed
@@ -99,9 +107,9 @@ generate_messages()
 ## DEPENDS: system dependencies of this project that dependent projects also need
 catkin_package(
 #  INCLUDE_DIRS include
-#  LIBRARIES patrolling_robot
-#  CATKIN_DEPENDS roscpp rospy
-#  DEPENDS system_lib
+  LIBRARIES aruco_ros_utils
+  CATKIN_DEPENDS roscpp rospy aruco
+  DEPENDS OpenCv 
 )
 
 ###########
@@ -129,6 +137,7 @@ include_directories(
 ## With catkin_make all packages are built within a single CMake context
 ## The recommended prefix ensures that target names across packages don't collide
  add_executable(marker_server src/marker_server.cpp)
+ add_executable(find_markers src/find_markers.cpp)
 
 ## Rename C++ executable without prefix
 ## The above recommended prefix causes long target names, the following renames the
@@ -141,9 +150,15 @@ include_directories(
 add_dependencies(marker_server ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 
 ## Specify libraries to link a library or executable target against
- target_link_libraries(marker_server
-   ${catkin_LIBRARIES}
- )
+target_link_libraries(marker_server
+  ${catkin_LIBRARIES}
+)
+
+target_link_libraries(find_markers
+  ${catkin_LIBRARIES} 
+  ${OpenCV_LIBRARIES}
+  ${aruco_LIBS}
+)
 
 #############
 ## Install ##
