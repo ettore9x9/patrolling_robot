@@ -63,6 +63,4 @@
         --shutdown-timeout 3">
     </node>
 
-  <node name="marker_server" pkg="patrolling_robot" type="marker_server" />
-
 </launch>

@@ -1,0 +1,37 @@
+<launch>
+
+	<include file="$(find patrolling_robot)/launch/gazebo_environment.launch"/>
+
+    <rosparam param="test/recharging_time"> 8 </rosparam>
+
+    <rosparam param="test/random_sense/active"> True </rosparam>
+    <rosparam param="test/random_sense/battery_time"> [40.0, 60.0] </rosparam>
+
+    <node pkg="armor" 
+          type="execute" 
+          name="armor_service" 
+          args="it.emarolab.armor.ARMORMainService"
+          launch-prefix="xterm -fa 'Monospace' -fs 10 -e"
+          output="screen"
+    > </node>
+
+    <node pkg = "surveillance_robot"
+          type = "state_machine.py"      
+          name = "state_machine"
+          launch-prefix="xterm -fa 'Monospace' -fs 14 -e"
+          output = "screen"
+    > </node>
+
+    <node pkg = "surveillance_robot"  
+          type = "battery_manager.py"
+          name = "battery_manager"
+          launch-prefix="xterm -fa 'Monospace' -fs 10 -e"
+          output = "screen"
+    > </node>
+
+    <node pkg="patrolling_robot"
+    	  type="marker_server" 
+    	  name="marker_server" 
+    > </node>
+
+</launch>
