@@ -1,0 +1,78 @@
+[33mcommit ec331c20e2e4219b55fdd7b9ca224d7fc9e6352b[m[33m ([m[1;36mHEAD -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m
+Author: ettore9x9 <ettoresani0@gmail.com>
+Date:   Thu Dec 15 14:26:35 2022 +0000
+
+    robot's arm
+
+[33mcommit 5c9a652c63d4a10cad7afc10c79cd5b000aa9aae[m
+Author: ettore9x9 <ettoresani0@gmail.com>
+Date:   Sun Dec 11 18:39:23 2022 +0000
+
+    find_markers node
+
+[33mcommit 10598352a24cff187afac9440b1aa8a324a17161[m
+Author: ettore9x9 <ettoresani0@gmail.com>
+Date:   Sun Dec 11 11:24:14 2022 +0000
+
+    launch file
+
+[33mcommit 30b00c6a5cc465d4ca811b370262513ed7f41e7e[m
+Author: ettore9x9 <ettoresani0@gmail.com>
+Date:   Sun Dec 11 10:41:24 2022 +0000
+
+    pid tuning
+
+[33mcommit 8a53bc735c59b1c49c2807cf6fcf4adafa4be635[m
+Author: ettore9x9 <ettoresani0@gmail.com>
+Date:   Sat Dec 10 15:19:12 2022 +0000
+
+    add ros2 robot
+
+[33mcommit 1f8eb9ffcadea9a01b1656acacd3d42da9ce0618[m
+Author: ettore9x9 <ettoresani0@gmail.com>
+Date:   Wed Dec 7 10:37:43 2022 +0000
+
+    pkg setup
+
+[33mcommit 019292488a28308d3a83c4c9d2a90968b912d878[m
+Author: CarmineD8 <carmine.recchiuto@dibris.unige.it>
+Date:   Wed Dec 7 09:34:22 2022 +0100
+
+    Update README.md
+
+[33mcommit 36667258edb9156d7bd620fc0f2a30cb6175a007[m
+Merge: 3254acc 373bd07
+Author: CarmineD8 <carmine.recchiuto@dibris.unige.it>
+Date:   Wed Dec 7 08:29:34 2022 +0000
+
+    Merge branch 'main' of https://github.com/CarmineD8/assignment2 into main
+
+[33mcommit 3254acc809a230387adb97750c41defa787425f9[m
+Author: CarmineD8 <carmine.recchiuto@dibris.unige.it>
+Date:   Wed Dec 7 08:29:05 2022 +0000
+
+    assignment updated
+
+[33mcommit 373bd076660d09d1ecbf271ecac1c2327bf1a2c6[m
+Author: CarmineD8 <carmine.recchiuto@dibris.unige.it>
+Date:   Tue Dec 6 19:14:10 2022 +0100
+
+    Update README.md
+
+[33mcommit 46d3b94cfa610a69d78d315e72321130ff0fae47[m
+Author: CarmineD8 <carmine.recchiuto@dibris.unige.it>
+Date:   Tue Dec 6 19:12:16 2022 +0100
+
+    Update README.md
+
+[33mcommit 678714bf85fc2e451adb51e225c3945bd0819651[m
+Author: CarmineD8 <carmine.recchiuto@dibris.unige.it>
+Date:   Tue Dec 6 19:11:03 2022 +0100
+
+    Create README.md
+
+[33mcommit 0049bf4f36dc058c8068f14392e237135b1ec755[m
+Author: CarmineD8 <carmine.recchiuto@dibris.unige.it>
+Date:   Tue Dec 6 17:58:09 2022 +0000
+
+    assignment updated

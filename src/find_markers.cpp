@@ -13,12 +13,12 @@ class FindMarker
   ros::NodeHandle nh_;
   ros::Subscriber image_sub_;
   ros::Publisher image_pub_;
-  aruco::MarkerDetector MDetector;
+  aruco::MarkerDetector MD;
 
 public:
   FindMarker()
   {
-  	//MDetector.setDictionary("ARUCO_MIP_36h12");
+  	MD.setDictionary("ARUCO");
 
     // Subscribe to input video feed
     image_sub_ = nh_.subscribe("/camera/rgb/image_raw", 1, &FindMarker::imageCb, this);
@@ -44,7 +44,7 @@ public:
       return;
     }
 
-    std::vector<aruco::Marker> markers=MDetector.detect(cv_ptr->image);
+    std::vector<aruco::Marker> markers=MD.detect(cv_ptr->image);
 
     for(size_t i=0;i<markers.size();i++){ 
     	markers[i].draw(cv_ptr->image);
