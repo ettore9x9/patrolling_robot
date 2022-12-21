@@ -292,28 +292,62 @@
     </joint>
   </transmission>
 
-  <!-- joints and links to move the camera, allowing yawl and pitch motions-->
-  <xacro:joint_link name="yawl_joint" ax="0 0 1" lower="-3.14" upper="3.14" parent="base_link" child="yawl_link" origin_xyz="-0.038 0 0.127"  />
+  <!-- joints and links to move the camera, allowing yawl, pitch and vertical motions-->
+  <joint name="yawl_joint" type="continuous">
+    <axis xyz="0 0 1"/>
+    <limit effort="1000.0" velocity="0.2"/>
+    <origin rpy="0 0 0" xyz="-0.038 0 0.152"/>
+    <parent link="base_link"/>
+    <child link="yawl_link"/>
+    <joint_properties damping="5.0" friction="1.0"/>
+  </joint>
 
   <link name="yawl_link">
     <collision>
       <origin xyz="0 0 0" rpy="0 0 0"/>
       <geometry>
-        <cylinder length="0.01" radius="0.025"/>
+        <cylinder length="0.06" radius="0.02"/>
       </geometry>
     </collision>
 
     <visual>
       <origin xyz="0 0 0" rpy="0 0 0"/>
       <geometry>
-        <cylinder length="0.01" radius="0.025"/>
+        <cylinder length="0.06" radius="0.02"/>
       </geometry>
     </visual>
 
-    <xacro:cylinder_inertia mass="0.2" r="0.02" l="0.001" o_rpy="0 0 0"/>
+    <xacro:cylinder_inertia mass="0.2" r="0.02" l="0.06" o_rpy="0 0 0"/>
   </link>
 
-  <xacro:joint_link name="pitch_joint" ax="0 1 0" lower="-0.5" upper="0.5" parent="yawl_link" child="pitch_link" origin_xyz="0 0 0.01"  />
+  <joint name="vertical_joint" type="prismatic">
+    <axis xyz="0 0 1"/>
+    <limit lower="0" upper="0.05" effort="1000.0" velocity="0.2"/>
+    <origin rpy="0 0 0" xyz="0 0 0.01"/>
+    <parent link="yawl_link"/>
+    <child link="vertical_link"/>
+    <joint_properties damping="5.0" friction="1.0"/>
+  </joint>
+
+  <link name="vertical_link">
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <cylinder length="0.06" radius="0.016"/>
+      </geometry>
+    </collision>
+
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <cylinder length="0.06" radius="0.016"/>
+      </geometry>
+    </visual>
+
+    <xacro:cylinder_inertia mass="0.1" r="0.016" l="0.06" o_rpy="0 0 0"/>
+  </link>
+
+  <xacro:joint_link name="pitch_joint" ax="0 1 0" lower="-0.5" upper="0.5" parent="vertical_link" child="pitch_link" origin_xyz="0 0 0.03"  />
 
   <link name="pitch_link">
     <collision>
@@ -348,12 +382,23 @@
       </actuator>
     </transmission>
 
+    <transmission name="vertical_joint_trans">
+      <type>transmission_interface/SimpleTransmission</type>
+      <joint name="vertical_joint">
+        <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+      </joint>
+      <actuator name="motor2">
+        <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+        <mechanicalInterface>1</mechanicalInterface>
+      </actuator>
+    </transmission>
+
     <transmission name="pitch_joint_trans">
       <type>transmission_interface/SimpleTransmission</type>
       <joint name="pitch_joint">
         <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
       </joint>
-      <actuator name="motor2">
+      <actuator name="motor3">
         <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
         <mechanicalInterface>1</mechanicalInterface>
       </actuator>

@@ -42,6 +42,10 @@
     <material>Gazebo/White</material>
   </gazebo>
 
+  <gazebo reference="vertical_link">
+    <material>Gazebo/Grey</material>
+  </gazebo>
+
   <gazebo reference="pitch_link">
     <material>Gazebo/White</material>
   </gazebo>

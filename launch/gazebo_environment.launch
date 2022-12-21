@@ -58,8 +58,9 @@
 
   <node name="controller_spawner" pkg="controller_manager" type="spawner" output="screen" args="
         joint_state_controller
-        pitch_joint_position_controller
         yawl_joint_velocity_controller
+        vertical_joint_position_controller
+        pitch_joint_position_controller
         --shutdown-timeout 3">
     </node>
 
