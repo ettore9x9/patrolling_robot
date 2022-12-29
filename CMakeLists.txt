@@ -23,7 +23,6 @@ find_package(catkin REQUIRED COMPONENTS
 # find_package(Boost REQUIRED COMPONENTS system)
 find_package (OpenCV REQUIRED)
 find_package(aruco REQUIRED)
-find_package(OpenCV REQUIRED)
 
 ## Uncomment this if the package has a setup.py. This macro ensures
 ## modules and global scripts declared therein get installed
@@ -58,6 +57,7 @@ find_package(OpenCV REQUIRED)
 add_message_files(
    FILES
    RoomConnection.msg
+   MoveCamera.msg
  )
 
 ## Generate services in the 'srv' folder
@@ -138,6 +138,7 @@ include_directories(
 ## The recommended prefix ensures that target names across packages don't collide
  add_executable(marker_server src/marker_server.cpp)
  add_executable(find_markers src/find_markers.cpp)
+ add_executable(move_camera src/move_camera.cpp)
 
 ## Rename C++ executable without prefix
 ## The above recommended prefix causes long target names, the following renames the
@@ -158,6 +159,10 @@ target_link_libraries(find_markers
   ${catkin_LIBRARIES} 
   ${OpenCV_LIBRARIES}
   ${aruco_LIBS}
+)
+
+target_link_libraries(move_camera
+  ${catkin_LIBRARIES}
 )
 
 #############

@@ -295,7 +295,7 @@
   <!-- joints and links to move the camera, allowing yawl, pitch and vertical motions-->
   <joint name="yawl_joint" type="continuous">
     <axis xyz="0 0 1"/>
-    <limit effort="1000.0" velocity="0.2"/>
+    <limit effort="1000.0" velocity="1.0"/>
     <origin rpy="0 0 0" xyz="-0.038 0 0.152"/>
     <parent link="base_link"/>
     <child link="yawl_link"/>

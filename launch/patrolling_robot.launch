@@ -26,7 +26,7 @@
           type = "battery_manager.py"
           name = "battery_manager"
           launch-prefix="xterm -fa 'Monospace' -fs 10 -e"
-          output = "screen"
+          output="screen"
     > </node>
 
     <node pkg="patrolling_robot"
@@ -36,7 +36,14 @@
 
     <node pkg="patrolling_robot"
         type="find_markers" 
-        name="find_markers" 
+        name="find_markers"
+        output="screen"
+    > </node>
+
+    <node pkg="patrolling_robot"
+        type="move_camera" 
+        name="move_camera"
+        output="screen"
     > </node>
 
 </launch>
