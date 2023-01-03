@@ -45,7 +45,7 @@ public:
     if (msg.position[6] > 0.01) {
       float theta = std::fmod(msg.position[6], 6.28);
       if (theta > 0 && theta < 0.01 && !turn){
-        std::cout << std:: endl<< "turn" << std::endl;
+        ROS_INFO("Full camera's turn.");
         std_msgs::Bool res;
         res.data = 1;
         turn = 1;

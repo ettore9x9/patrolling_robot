@@ -8,7 +8,11 @@
 #include <patrolling_robot/MoveCamera.h>
 #include <unistd.h>
 #include <std_msgs/Bool.h>
+#include <patrolling_robot/RoomConnection.h>
+#include <patrolling_robot/RoomInformation.h>
+#include <surveillance_robot/Statement.h>
 
+const int  NUM_MARKERS = 7;
 static const std::string OPENCV_WINDOW = "Image window";
 
 class FindMarker
@@ -17,6 +21,8 @@ class FindMarker
   ros::Subscriber image_sub;
   ros::Subscriber turn_sub;
   ros::Publisher movecam_pub;
+  ros::Publisher statement_pub;
+  ros::ServiceClient marker_cli;
   aruco::MarkerDetector MD;
   std::vector<int> detected;
   int turn = 0;
@@ -30,6 +36,8 @@ public:
     image_sub   = nh.subscribe("/camera/rgb/image_raw", 1, &FindMarker::imageCb, this);
     turn_sub    = nh.subscribe("/camera_turn", 1, &FindMarker::turnCb, this);
     movecam_pub = nh.advertise<patrolling_robot::MoveCamera>("/camera_command",1);
+    statement_pub = nh.advertise<surveillance_robot::Statement>("/map/statement",1);
+    marker_cli  = nh.serviceClient<patrolling_robot::RoomInformation>("/room_info");
 
     cv::namedWindow(OPENCV_WINDOW);
   }
@@ -57,7 +65,17 @@ public:
     for(size_t i=0;i<markers.size();i++){
       if (!std::count(detected.begin(), detected.end(), markers[i].id)) {
         detected.push_back(markers[i].id);
-        std::cout << std::to_string(markers[i].id) << std::endl;
+        ROS_INFO("Aruco with id %d detected.", markers[i].id);
+        patrolling_robot::RoomInformation srv;
+        srv.request.id = markers[i].id;
+        if (marker_cli.call(srv)){
+          surveillance_robot::Statement msg;
+          msg.location = srv.response.room.c_str();
+          msg.door = srv.response.connections[0].through_door.c_str();
+          msg.stamp = ros::Time::now();
+          statement_pub.publish(msg);
+          ROS_INFO("Room %s detected", srv.response.room.c_str());
+        }
       }
     	markers[i].draw(cv_ptr->image);
     }
@@ -95,7 +113,7 @@ public:
   }
 
   int markers_found(){
-    if (detected.size() == 7)
+    if (detected.size() == NUM_MARKERS)
       return 1;
     return 0;
   }
@@ -105,7 +123,7 @@ int main(int argc, char** argv)
 {
   ros::init(argc, argv, "find_markers");
   FindMarker ic;
-
+  sleep(5);
   ros::Rate loop_rate(100);
   while (!ic.markers_found()){
     ic.loop();
