@@ -11,6 +11,7 @@
 #include <patrolling_robot/RoomConnection.h>
 #include <patrolling_robot/RoomInformation.h>
 #include <surveillance_robot/Statement.h>
+#include <mutex>
 
 const int  NUM_MARKERS = 7;
 static const std::string OPENCV_WINDOW = "Image window";
@@ -23,8 +24,11 @@ class FindMarker
   ros::Publisher movecam_pub;
   ros::Publisher statement_pub;
   ros::ServiceClient marker_cli;
+  ros::Timer timerPublishStatement;
   aruco::MarkerDetector MD;
   std::vector<int> detected;
+  std::vector<std::pair<std::string, std::string>> Statement;
+  std::mutex m;
   int turn = 0;
 
 public:
@@ -38,6 +42,7 @@ public:
     movecam_pub = nh.advertise<patrolling_robot::MoveCamera>("/camera_command",1);
     statement_pub = nh.advertise<surveillance_robot::Statement>("/map/statement",1);
     marker_cli  = nh.serviceClient<patrolling_robot::RoomInformation>("/room_info");
+    timerPublishStatement = nh.createTimer(ros::Duration(1.0 / 10.0), std::bind(&FindMarker::publishStatement, this));
 
     cv::namedWindow(OPENCV_WINDOW);
   }
@@ -69,12 +74,11 @@ public:
         patrolling_robot::RoomInformation srv;
         srv.request.id = markers[i].id;
         if (marker_cli.call(srv)){
-          surveillance_robot::Statement msg;
-          msg.location = srv.response.room.c_str();
-          msg.door = srv.response.connections[0].through_door.c_str();
-          msg.stamp = ros::Time::now();
-          statement_pub.publish(msg);
-          ROS_INFO("Room %s detected", srv.response.room.c_str());
+          m.lock();
+          for (int j=0; j<srv.response.connections.size(); j++) {
+            Statement.push_back(std::make_pair(srv.response.room.c_str(),srv.response.connections[j].through_door.c_str()));
+          }
+          m.unlock();
         }
       }
     	markers[i].draw(cv_ptr->image);
@@ -117,13 +121,26 @@ public:
       return 1;
     return 0;
   }
+
+  void publishStatement(){
+    if (!Statement.empty()){
+      m.lock();
+      surveillance_robot::Statement msg;
+      msg.location = Statement[0].first;
+      msg.door = Statement[0].second;
+      msg.stamp = ros::Time::now();
+      statement_pub.publish(msg);
+      Statement.erase(Statement.begin());
+      m.unlock();
+    }
+  }
 };
 
 int main(int argc, char** argv)
 {
   ros::init(argc, argv, "find_markers");
   FindMarker ic;
-  sleep(5);
+  ros::Duration(4).sleep();
   ros::Rate loop_rate(100);
   while (!ic.markers_found()){
     ic.loop();
@@ -131,5 +148,6 @@ int main(int argc, char** argv)
     loop_rate.sleep();
   }
   ic.camCommand(0.0, 0.0, 0.0);
+  ros::spin();
   return 0;
 }

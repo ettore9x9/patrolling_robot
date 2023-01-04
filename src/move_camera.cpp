@@ -42,9 +42,9 @@ public:
   }
 
   void turnCb(const sensor_msgs::JointState msg) {
-    if (msg.position[6] > 0.01) {
+    if (msg.position[6] > 0.02) {
       float theta = std::fmod(msg.position[6], 6.28);
-      if (theta > 0 && theta < 0.01 && !turn){
+      if (theta > 0 && theta < 0.02 && !turn){
         ROS_INFO("Full camera's turn.");
         std_msgs::Bool res;
         res.data = 1;

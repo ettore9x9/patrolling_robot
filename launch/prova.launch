@@ -23,7 +23,6 @@
           type = "state_machine.py"      
           name = "state_machine"
           respawn="true"
-          respawn_delay="4"
           launch-prefix="xterm -fa 'Monospace' -fs 14 -e"
           output = "screen"
     > </node>
