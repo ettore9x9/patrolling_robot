@@ -17,6 +17,7 @@ find_package(catkin REQUIRED COMPONENTS
   aruco_msgs
   sensor_msgs
   visualization_msgs
+  nav_msgs
 )
 
 ## System dependencies are found with CMake's conventions
@@ -64,6 +65,8 @@ add_message_files(
 add_service_files(
    FILES
    RoomInformation.srv
+   SetRoomPosition.srv
+   AskPosition.srv
  )
 
 ## Generate actions in the 'action' folder

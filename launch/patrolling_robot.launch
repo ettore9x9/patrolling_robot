@@ -1,6 +1,9 @@
 <launch>
     <!-- Run the architecture's component and test it based on random-based stimulus. -->
     <include file="$(find patrolling_robot)/launch/gazebo_environment.launch"/>
+    <include file="$(find patrolling_robot)/launch/simulation_gmapping.launch"/>
+    <include file="$(find patrolling_robot)/launch/move_base.launch"/>
+
 
     <rosparam param="test/random_plan_points"> [2, 8] </rosparam>
     <rosparam param="test/random_plan_time"> [0.2, 0.8] </rosparam>
@@ -15,8 +18,7 @@
           type="execute" 
           name="armor_service" 
           args="it.emarolab.armor.ARMORMainService"
-          launch-prefix="xterm -fa 'Monospace' -fs 10 -e"
-          output="screen"
+          output="log"
     > </node>
 
     <node pkg = "surveillance_robot"
@@ -52,15 +54,11 @@
           output = "screen"
     > </node>
 
-    <node pkg = "surveillance_robot"  
-          type = "planner.py"
-          name = "planner"
-          output = "screen"
-    > </node>
 
-    <node pkg = "surveillance_robot"  
-          type = "controller.py"
-          name = "controller"
+    <node pkg = "patrolling_robot"  
+          type = "rosbot_state.py"
+          name = "rosbot_state"
+          launch-prefix="xterm -fa 'Monospace' -fs 10 -e"
           output = "screen"
     > </node>
 

@@ -13,10 +13,10 @@
       <rightFrontJoint>front_right_wheel_hinge</rightFrontJoint>
       <leftRearJoint>rear_left_wheel_hinge</leftRearJoint>
       <rightRearJoint>rear_right_wheel_hinge</rightRearJoint>
-      <topicName>turtle1/cmd_vel</topicName>
-      <commandTopic>turtle1/cmd_vel</commandTopic>
+      <topicName>/cmd_vel</topicName>
+      <commandTopic>/cmd_vel</commandTopic>
       <broadcastTF>true</broadcastTF>
-      <odometryTopic>odom</odometryTopic>
+      <odometryTopic>/odom</odometryTopic>
       <odometryFrame>${namespace}/odom</odometryFrame>
       <covariance_x>0.000100</covariance_x>
       <covariance_y>0.000100</covariance_y>

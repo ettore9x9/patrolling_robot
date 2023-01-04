@@ -10,6 +10,7 @@
 #include <std_msgs/Bool.h>
 #include <patrolling_robot/RoomConnection.h>
 #include <patrolling_robot/RoomInformation.h>
+#include <patrolling_robot/SetRoomPosition.h>
 #include <surveillance_robot/Statement.h>
 #include <mutex>
 
@@ -18,30 +19,34 @@ static const std::string OPENCV_WINDOW = "Image window";
 
 class FindMarker
 {
+private:
   ros::NodeHandle nh;
   ros::Subscriber image_sub;
   ros::Subscriber turn_sub;
   ros::Publisher movecam_pub;
   ros::Publisher statement_pub;
   ros::ServiceClient marker_cli;
+  ros::ServiceClient room_cli;
   ros::Timer timerPublishStatement;
   aruco::MarkerDetector MD;
   std::vector<int> detected;
-  std::vector<std::pair<std::string, std::string>> Statement;
   std::mutex m;
   int turn = 0;
 
 public:
+  std::vector<std::pair<std::string, std::string>> Statement;
+
   FindMarker()
   {
   	MD.setDictionary("ARUCO");
 
     // Subscribe to input video feed
-    image_sub   = nh.subscribe("/camera/rgb/image_raw", 1, &FindMarker::imageCb, this);
-    turn_sub    = nh.subscribe("/camera_turn", 1, &FindMarker::turnCb, this);
-    movecam_pub = nh.advertise<patrolling_robot::MoveCamera>("/camera_command",1);
+    image_sub     = nh.subscribe("/camera/rgb/image_raw", 1, &FindMarker::imageCb, this);
+    turn_sub      = nh.subscribe("/camera_turn", 1, &FindMarker::turnCb, this);
+    movecam_pub   = nh.advertise<patrolling_robot::MoveCamera>("/camera_command",1);
     statement_pub = nh.advertise<surveillance_robot::Statement>("/map/statement",1);
-    marker_cli  = nh.serviceClient<patrolling_robot::RoomInformation>("/room_info");
+    marker_cli    = nh.serviceClient<patrolling_robot::RoomInformation>("/room_info");
+    room_cli      = nh.serviceClient<patrolling_robot::SetRoomPosition>("/set_room_position");
     timerPublishStatement = nh.createTimer(ros::Duration(1.0 / 10.0), std::bind(&FindMarker::publishStatement, this));
 
     cv::namedWindow(OPENCV_WINDOW);
@@ -71,12 +76,19 @@ public:
       if (!std::count(detected.begin(), detected.end(), markers[i].id)) {
         detected.push_back(markers[i].id);
         ROS_INFO("Aruco with id %d detected.", markers[i].id);
-        patrolling_robot::RoomInformation srv;
-        srv.request.id = markers[i].id;
-        if (marker_cli.call(srv)){
+        patrolling_robot::RoomInformation infoSrv;
+        infoSrv.request.id = markers[i].id;
+        if (marker_cli.call(infoSrv)){
+
+          patrolling_robot::SetRoomPosition roomSrv;
+          roomSrv.request.room = infoSrv.response.room;
+          roomSrv.request.x = infoSrv.response.x;
+          roomSrv.request.y = infoSrv.response.y;
+          room_cli.call(roomSrv);
+          
           m.lock();
-          for (int j=0; j<srv.response.connections.size(); j++) {
-            Statement.push_back(std::make_pair(srv.response.room.c_str(),srv.response.connections[j].through_door.c_str()));
+          for (int j=0; j<infoSrv.response.connections.size(); j++) {
+            Statement.push_back(std::make_pair(infoSrv.response.room.c_str(),infoSrv.response.connections[j].through_door.c_str()));
           }
           m.unlock();
         }
@@ -147,7 +159,14 @@ int main(int argc, char** argv)
     ros::spinOnce();
     loop_rate.sleep();
   }
+
   ic.camCommand(0.0, 0.0, 0.0);
-  ros::spin();
+  ic.Statement.push_back(std::make_pair("",""));
+
+  while(!ic.Statement.empty()) {
+    ros::spinOnce();
+    loop_rate.sleep();
+  }
+
   return 0;
 }
