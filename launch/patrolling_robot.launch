@@ -44,21 +44,32 @@
     <node pkg="patrolling_robot"
           type="find_markers" 
           name="find_markers"
+          launch-prefix="xterm -fa 'Monospace' -fs 10 -e"
           output="screen"
     > </node>
 
     <node pkg = "surveillance_robot"  
           type = "battery_manager.py"
           name = "battery_manager"
+          output = "screen"
+    > </node>
+
+    <node pkg = "patrolling_robot"  
+          type = "planner.py"
+          name = "planner"
+          output = "screen"
+    > </node>
+
+    <node pkg = "patrolling_robot"  
+          type = "controller.py"
+          name = "controller"
           launch-prefix="xterm -fa 'Monospace' -fs 10 -e"
           output = "screen"
     > </node>
 
-
     <node pkg = "patrolling_robot"  
           type = "rosbot_state.py"
           name = "rosbot_state"
-          launch-prefix="xterm -fa 'Monospace' -fs 10 -e"
           output = "screen"
     > </node>
 

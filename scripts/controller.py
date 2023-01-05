@@ -53,7 +53,7 @@ class ControllingAction(object):
             feedback.reached_point = point
             self._as.publish_feedback(feedback)
             r = rospy.Rate(10)
-            while self.is_active is True or not rospy.is_shutdown():
+            while self.is_active is True and not rospy.is_shutdown():
                 r.sleep()
             log_msg = f'Reaching point ({point.x}, {point.y}).'
             rospy.loginfo(anm.tag_log(log_msg, LOG_TAG))
@@ -69,10 +69,13 @@ class ControllingAction(object):
     def active_cb(self):
         # Function executed when the communication starts.
         self.goal_counter += 1   # Increments the goal counter.
+        rospy.loginfo("Communication started, goal " + str(self.goal_counter))
 
     def feedback_cb(self, feedback):
         # Function executed when a feedback is received.
         self.feedback_counter += 1   # Increments the feedback counter.
+        if self.feedback_counter % 10 == 0:
+            rospy.loginfo("feedback "+str(self.feedback_counter)+" received")
 
     def done_cb(self, status, result):
         # Function executed when the communication ends.
