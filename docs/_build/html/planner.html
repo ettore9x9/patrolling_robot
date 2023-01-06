@@ -43,7 +43,14 @@
 <ul class="current">
 <li class="toctree-l1 current"><a class="reference internal" href="scripts.html">scripts</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="controller.html">controller module</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">planner module</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">planner module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#scripts.planner.PlanningAction"><code class="docutils literal notranslate"><span class="pre">PlanningAction</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#scripts.planner.PlanningAction.ExecuteCb"><code class="docutils literal notranslate"><span class="pre">PlanningAction.ExecuteCb()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#scripts.planner.main"><code class="docutils literal notranslate"><span class="pre">main()</span></code></a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="rosbot_state.html">rosbot_state module</a></li>
 </ul>
 </li>
@@ -75,8 +82,43 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <div class="section" id="planner-module">
-<h1>planner module<a class="headerlink" href="#planner-module" title="Permalink to this heading"></a></h1>
+  <div class="section" id="module-scripts.planner">
+<span id="planner-module"></span><h1>planner module<a class="headerlink" href="#module-scripts.planner" title="Permalink to this heading"></a></h1>
+<span class="target" id="module-planner"></span><p>This module simulates the planner node of the architecture. It implements a service that, provided with
+the goal, ask for the actual robot’s position and for the goal location’s position, and returns a list
+of two waypoints (start, goal).</p>
+<dl class="simple">
+<dt>Client of:</dt><dd><ul class="simple">
+<li><p>/info/ask_position for retreiving the needed positions</p></li>
+</ul>
+</dd>
+<dt>Service:</dt><dd><ul class="simple">
+<li><p>/motion/planner given a goal, returns a set of waypoints</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py class">
+<dt class="sig sig-object py" id="scripts.planner.PlanningAction">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">scripts.planner.</span></span><span class="sig-name descname"><span class="pre">PlanningAction</span></span><a class="reference internal" href="_modules/scripts/planner.html#PlanningAction"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#scripts.planner.PlanningAction" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>This class implements an action server to simulate motion planning.
+Given a target position, it returns a plan as a set of via points.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="scripts.planner.PlanningAction.ExecuteCb">
+<span class="sig-name descname"><span class="pre">ExecuteCb</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">goal</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/scripts/planner.html#PlanningAction.ExecuteCb"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#scripts.planner.PlanningAction.ExecuteCb" title="Permalink to this definition"></a></dt>
+<dd><p>Callback function invoked when a client set a goal to the <cite>planner</cite> server.
+This function will return a list of two points (i.e., the plan) when the fist point
+is the current robot position, while the second point is the <cite>goal</cite> position.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="scripts.planner.main">
+<span class="sig-prename descclassname"><span class="pre">scripts.planner.</span></span><span class="sig-name descname"><span class="pre">main</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/scripts/planner.html#main"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#scripts.planner.main" title="Permalink to this definition"></a></dt>
+<dd><p>This function initializes the planner ros node.</p>
+</dd></dl>
+
 </div>
 
 

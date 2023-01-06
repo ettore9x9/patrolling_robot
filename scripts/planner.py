@@ -1,14 +1,20 @@
 #! /usr/bin/env python
 """
 .. module:: planner
-  :platform: Unix 
-  :synopsis: Python module for the node that plans the robot's trajectory
-.. moduleauthor:: Ettore Sani 5322242@studenti.unige.it
+    :platform: Unix 
+    :synopsis: Python module for the node that plans the robot's trajectory
+    
+.. moduleauthor:: Ettore Sani <ettoresani0@gmail.com>
 
-This module simulates the planner node of the architecture. It implements a service that, provided the initial position, plans a variable number of waypoints to reach the goal position.
+This module simulates the planner node of the architecture. It implements a service that, provided with
+the goal, ask for the actual robot's position and for the goal location's position, and returns a list
+of two waypoints (start, goal).
+
+Client of:
+    * /info/ask_position for retreiving the needed positions
 
 Service:
-    /motion/planner
+    * /motion/planner given a goal, returns a set of waypoints
 
 """
 
@@ -29,7 +35,7 @@ LOG_TAG = anm.NODE_PLANNER   # Tag for identifying logs producer.
 ### CLASSES ###
 class PlanningAction(object):
     """This class implements an action server to simulate motion planning.
-    Given an initial and a target position, it returns a plan as a set of via points.
+    Given a target position, it returns a plan as a set of via points.
 
     """
     def __init__(self):
@@ -37,35 +43,31 @@ class PlanningAction(object):
         # Instantiate and start the action server based on the `SimpleActionServer` class.
         self._as = SimpleActionServer(anm.ACTION_PLANNER, 
                                       PlanAction, 
-                                      execute_cb=self.execute_callback, 
+                                      execute_cb=self.ExecuteCb, 
                                       auto_start=False)
         self._as.start()
-        rospy.wait_for_service('/ask_position')
+        rospy.wait_for_service('/info/ask_position')
 
         try:
-            self.client = rospy.ServiceProxy("/ask_position", AskPosition)
+            self.client = rospy.ServiceProxy("/info/ask_position", AskPosition)
         except rospy.ServiceException as e:
             print("Service call failed: %s"%e)
       
-    def execute_callback(self, goal):
+    def ExecuteCb(self, goal):
         """Callback function invoked when a client set a goal to the `planner` server.
-        This function will return a list of random points (i.e., the plan) when the fist point
-        is the current robot position, while the last point is the `goal` position. The plan will contain 
-        a random number of other points, which spans in the range 
-        [`self._random_plan_points[0]`, `self._random_plan_points[1]`). To simulate computation,
-        each point is added to the plan with a random delay spanning in the range 
-        [`self._random_plan_time[0]`, `self._random_plan_time[1]`).
+        This function will return a list of two points (i.e., the plan) when the fist point
+        is the current robot position, while the second point is the `goal` position.
 
         """
         req = AskPositionRequest()
         req.what = "rosbot"
-        start_point  = self.client(req)
+        startPoint  = self.client(req)
         req.what = goal.target
-        target_point = self.client(req)
+        targetPoint = self.client(req)
 
         # Check if the start and target positions are correct. If not, this service will be aborted.
-        if  start_point is None or target_point is None:
-            log_msg = 'Cannot have `None` target_point. This service will be aborted!.'
+        if  startPoint is None or targetPoint is None:
+            log_msg = 'Cannot have `None` target point. This service will be aborted!.'
             rospy.logerr(anm.tag_log(log_msg, LOG_TAG))
             # Close service by returning an `ABORT` state to the client.
             self._as.set_aborted()
@@ -74,12 +76,12 @@ class PlanningAction(object):
         # Initialise the `feedback` with the starting point of the plan.
         feedback = PlanFeedback()
         feedback.via_points = []
-        feedback.via_points.append(start_point)
+        feedback.via_points.append(startPoint)
         # Publish the feedback and wait to simulate computation.
         self._as.publish_feedback(feedback)
 
         # Append the target point to the plan as the last point.
-        feedback.via_points.append(target_point)
+        feedback.via_points.append(targetPoint)
 
         # Publish the results to the client.        
         result = PlanResult()

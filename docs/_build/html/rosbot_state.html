@@ -44,7 +44,19 @@
 <li class="toctree-l1 current"><a class="reference internal" href="scripts.html">scripts</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="controller.html">controller module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="planner.html">planner module</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">rosbot_state module</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">rosbot_state module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#scripts.rosbot_state.RoomPositionManager"><code class="docutils literal notranslate"><span class="pre">RoomPositionManager</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#scripts.rosbot_state.RoomPositionManager.robotPoseX"><code class="docutils literal notranslate"><span class="pre">RoomPositionManager.robotPoseX</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#scripts.rosbot_state.RoomPositionManager.robotPoseY"><code class="docutils literal notranslate"><span class="pre">RoomPositionManager.robotPoseY</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#scripts.rosbot_state.RoomPositionManager.dictionary"><code class="docutils literal notranslate"><span class="pre">RoomPositionManager.dictionary</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#scripts.rosbot_state.RoomPositionManager.AddNewRoom"><code class="docutils literal notranslate"><span class="pre">RoomPositionManager.AddNewRoom()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#scripts.rosbot_state.RoomPositionManager.FindPosition"><code class="docutils literal notranslate"><span class="pre">RoomPositionManager.FindPosition()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#scripts.rosbot_state.RoomPositionManager.UpdateRobotPose"><code class="docutils literal notranslate"><span class="pre">RoomPositionManager.UpdateRobotPose()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#scripts.rosbot_state.main"><code class="docutils literal notranslate"><span class="pre">main()</span></code></a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="src.html">src</a></li>
@@ -75,8 +87,105 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <div class="section" id="rosbot-state-module">
-<h1>rosbot_state module<a class="headerlink" href="#rosbot-state-module" title="Permalink to this heading"></a></h1>
+  <div class="section" id="module-scripts.rosbot_state">
+<span id="rosbot-state-module"></span><h1>rosbot_state module<a class="headerlink" href="#module-scripts.rosbot_state" title="Permalink to this heading"></a></h1>
+<span class="target" id="module-rosbot_state"></span><p>ROS node for managing the positions of rooms and the robot in a robotics system.
+It provides services for adding new rooms and asking for the positions of rooms and the robot,
+and it listens for updates to the robot’s pose and stores the current pose of the robot.</p>
+<dl class="simple">
+<dt>Subscribes to:</dt><dd><ul class="simple">
+<li><p>/odom topic where the simulator publishes the robot position</p></li>
+</ul>
+</dd>
+<dt>Services:</dt><dd><ul class="simple">
+<li><p>/info/ask_position it replies with the robot’s or room’s position</p></li>
+<li><p>/info/set_room_position used for setting a new room’s position</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py class">
+<dt class="sig sig-object py" id="scripts.rosbot_state.RoomPositionManager">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">scripts.rosbot_state.</span></span><span class="sig-name descname"><span class="pre">RoomPositionManager</span></span><a class="reference internal" href="_modules/scripts/rosbot_state.html#RoomPositionManager"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#scripts.rosbot_state.RoomPositionManager" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>Class for managing the robot’s and rooms’ positions.</p>
+<p>This class provides services for adding new rooms and asking for the positions
+of rooms and the robot. It also listens for updates to the robot’s pose and
+stores the current pose of the robot.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="scripts.rosbot_state.RoomPositionManager.robotPoseX">
+<span class="sig-name descname"><span class="pre">robotPoseX</span></span><a class="headerlink" href="#scripts.rosbot_state.RoomPositionManager.robotPoseX" title="Permalink to this definition"></a></dt>
+<dd><p>The x-coordinate of the robot’s current pose.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="scripts.rosbot_state.RoomPositionManager.robotPoseY">
+<span class="sig-name descname"><span class="pre">robotPoseY</span></span><a class="headerlink" href="#scripts.rosbot_state.RoomPositionManager.robotPoseY" title="Permalink to this definition"></a></dt>
+<dd><p>The y-coordinate of the robot’s current pose.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="scripts.rosbot_state.RoomPositionManager.dictionary">
+<span class="sig-name descname"><span class="pre">dictionary</span></span><a class="headerlink" href="#scripts.rosbot_state.RoomPositionManager.dictionary" title="Permalink to this definition"></a></dt>
+<dd><p>A dictionary mapping room names to their positions.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="scripts.rosbot_state.RoomPositionManager.AddNewRoom">
+<span class="sig-name descname"><span class="pre">AddNewRoom</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/scripts/rosbot_state.html#RoomPositionManager.AddNewRoom"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#scripts.rosbot_state.RoomPositionManager.AddNewRoom" title="Permalink to this definition"></a></dt>
+<dd><p>Add a new room to the dictionary of positions.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>request</strong> – A SetRoomPosition request containing the name and position of</p></li>
+<li><p><strong>room.</strong> (<em>the new</em>) – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A SetRoomPositionResponse with a boolean data field indicating whether
+the room was successfully added to the dictionary.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="scripts.rosbot_state.RoomPositionManager.FindPosition">
+<span class="sig-name descname"><span class="pre">FindPosition</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/scripts/rosbot_state.html#RoomPositionManager.FindPosition"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#scripts.rosbot_state.RoomPositionManager.FindPosition" title="Permalink to this definition"></a></dt>
+<dd><p>Find the position of a room or the robot.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>request</strong> – An AskPosition request containing the name of the room or “rosbot”</p></li>
+<li><p><strong>robot.</strong> (<em>to indicate the position</em><em> of </em><em>the</em>) – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>An AskPositionResponse with the x and y coordinates of the requested
+room or robot.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="scripts.rosbot_state.RoomPositionManager.UpdateRobotPose">
+<span class="sig-name descname"><span class="pre">UpdateRobotPose</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/scripts/rosbot_state.html#RoomPositionManager.UpdateRobotPose"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#scripts.rosbot_state.RoomPositionManager.UpdateRobotPose" title="Permalink to this definition"></a></dt>
+<dd><p>Update the stored pose of the robot.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>data</strong> – An Odometry message containing the current pose of the robot.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="scripts.rosbot_state.main">
+<span class="sig-prename descclassname"><span class="pre">scripts.rosbot_state.</span></span><span class="sig-name descname"><span class="pre">main</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/scripts/rosbot_state.html#main"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#scripts.rosbot_state.main" title="Permalink to this definition"></a></dt>
+<dd><p>Main function for the room position manager node.</p>
+<p>This function sets up the ROS node and creates an instance of the
+RoomPositionManager class.</p>
+</dd></dl>
+
 </div>
 
 

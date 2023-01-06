@@ -1,7 +1,7 @@
 planner module
 ==============
 
-.. automodule:: planner
+.. automodule:: scripts.planner
    :members:
    :undoc-members:
    :show-inheritance:

@@ -1,7 +1,7 @@
 controller module
 =================
 
-.. automodule:: controller
+.. automodule:: scripts.controller
    :members:
    :undoc-members:
    :show-inheritance:

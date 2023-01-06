@@ -42,7 +42,19 @@
               <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul class="current">
 <li class="toctree-l1 current"><a class="reference internal" href="scripts.html">scripts</a><ul class="current">
-<li class="toctree-l2 current"><a class="current reference internal" href="#">controller module</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">controller module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#scripts.controller.ControllingAction"><code class="docutils literal notranslate"><span class="pre">ControllingAction</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#scripts.controller.ControllingAction.ActiveCb"><code class="docutils literal notranslate"><span class="pre">ControllingAction.ActiveCb()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#scripts.controller.ControllingAction.CancelGoal"><code class="docutils literal notranslate"><span class="pre">ControllingAction.CancelGoal()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#scripts.controller.ControllingAction.DoneCb"><code class="docutils literal notranslate"><span class="pre">ControllingAction.DoneCb()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#scripts.controller.ControllingAction.ExecuteCb"><code class="docutils literal notranslate"><span class="pre">ControllingAction.ExecuteCb()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#scripts.controller.ControllingAction.FeedbackCb"><code class="docutils literal notranslate"><span class="pre">ControllingAction.FeedbackCb()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#scripts.controller.ControllingAction.ReachGoal"><code class="docutils literal notranslate"><span class="pre">ControllingAction.ReachGoal()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#scripts.controller.main"><code class="docutils literal notranslate"><span class="pre">main()</span></code></a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="planner.html">planner module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="rosbot_state.html">rosbot_state module</a></li>
 </ul>
@@ -75,8 +87,99 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <div class="section" id="controller-module">
-<h1>controller module<a class="headerlink" href="#controller-module" title="Permalink to this heading"></a></h1>
+  <div class="section" id="module-scripts.controller">
+<span id="controller-module"></span><h1>controller module<a class="headerlink" href="#module-scripts.controller" title="Permalink to this heading"></a></h1>
+<span class="target" id="module-controller"></span><p>ROS node for calling the move_base action service. It implements a service that, provided with
+a list of waypoints, asks the move_base planning, mapping and controlling algorithm to bring the
+robot sequencially through all of them. When a waypoint is reached, the robot turns the camera to
+look around, then starts again reaching the next waypoint, if any.</p>
+<dl class="simple">
+<dt>Client of:</dt><dd><ul class="simple">
+<li><p>/move_base</p></li>
+</ul>
+</dd>
+<dt>Publishes on:</dt><dd><ul class="simple">
+<li><p>/camera/camera_command</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py class">
+<dt class="sig sig-object py" id="scripts.controller.ControllingAction">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">scripts.controller.</span></span><span class="sig-name descname"><span class="pre">ControllingAction</span></span><a class="reference internal" href="_modules/scripts/controller.html#ControllingAction"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#scripts.controller.ControllingAction" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>Class representing an action for controlling the robot using an action server.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="scripts.controller.ControllingAction.ActiveCb">
+<span class="sig-name descname"><span class="pre">ActiveCb</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/scripts/controller.html#ControllingAction.ActiveCb"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#scripts.controller.ControllingAction.ActiveCb" title="Permalink to this definition"></a></dt>
+<dd><p>Function executed when the communication starts.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="scripts.controller.ControllingAction.CancelGoal">
+<span class="sig-name descname"><span class="pre">CancelGoal</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/scripts/controller.html#ControllingAction.CancelGoal"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#scripts.controller.ControllingAction.CancelGoal" title="Permalink to this definition"></a></dt>
+<dd><p>This function sends a cancel request to the move_base server.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="scripts.controller.ControllingAction.DoneCb">
+<span class="sig-name descname"><span class="pre">DoneCb</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">status</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">result</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/scripts/controller.html#ControllingAction.DoneCb"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#scripts.controller.ControllingAction.DoneCb" title="Permalink to this definition"></a></dt>
+<dd><p>Function executed when the communication ends.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>status</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><em>int</em></a>) – The status code returned by the action server communication.</p></li>
+<li><p><strong>result</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.11)"><em>object</em></a>) – The result returned by the action server communication.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="scripts.controller.ControllingAction.ExecuteCb">
+<span class="sig-name descname"><span class="pre">ExecuteCb</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">goal</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/scripts/controller.html#ControllingAction.ExecuteCb"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#scripts.controller.ControllingAction.ExecuteCb" title="Permalink to this definition"></a></dt>
+<dd><p>Callback function invoked when a client sets a goal to the <cite>controller</cite> server.
+This function requires a list of via points (i.e., the plan).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>goal</strong> (<em>ControlGoal</em>) – The goal for the <cite>controller</cite> server.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="scripts.controller.ControllingAction.FeedbackCb">
+<span class="sig-name descname"><span class="pre">FeedbackCb</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">feedback</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/scripts/controller.html#ControllingAction.FeedbackCb"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#scripts.controller.ControllingAction.FeedbackCb" title="Permalink to this definition"></a></dt>
+<dd><p>Function executed when a feedback is received.
+This function increments the feedback counter and logs a message every 10 feedbacks.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>feedback</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.11)"><em>object</em></a>) – The feedback from the action server.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="scripts.controller.ControllingAction.ReachGoal">
+<span class="sig-name descname"><span class="pre">ReachGoal</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/scripts/controller.html#ControllingAction.ReachGoal"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#scripts.controller.ControllingAction.ReachGoal" title="Permalink to this definition"></a></dt>
+<dd><p>This function sends a goal to the move base node, starting the action client communication.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><em>float</em></a>) – The x-coordinate of the goal.</p></li>
+<li><p><strong>y</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><em>float</em></a>) – The y-coordinate of the goal.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="scripts.controller.main">
+<span class="sig-prename descclassname"><span class="pre">scripts.controller.</span></span><span class="sig-name descname"><span class="pre">main</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/scripts/controller.html#main"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#scripts.controller.main" title="Permalink to this definition"></a></dt>
+<dd><p>This function initializes the controller ros node.</p>
+</dd></dl>
+
 </div>
 
 

@@ -1,7 +1,7 @@
-rosbot\_state module
+rosbot_state module
 ====================
 
-.. automodule:: rosbot_state
+.. automodule:: scripts.rosbot_state
    :members:
    :undoc-members:
    :show-inheritance:

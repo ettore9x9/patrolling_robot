@@ -167,7 +167,7 @@ Subscribes to: <linebreak/>
 <codeline lineno="102"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(state.position[6]<sp/>&gt;<sp/>0.02)<sp/>{</highlight></codeline>
 <codeline lineno="103"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>theta<sp/>=<sp/>std::fmod(state.position[6],<sp/>6.28);</highlight></codeline>
 <codeline lineno="104"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(theta<sp/>&gt;<sp/>0<sp/>&amp;&amp;<sp/>theta<sp/>&lt;<sp/>0.02<sp/>&amp;&amp;<sp/>!turn){</highlight></codeline>
-<codeline lineno="105"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ROS_INFO(</highlight><highlight class="stringliteral">&quot;Full<sp/>camera&apos;s<sp/>turn.&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="105"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ROS_INFO(</highlight><highlight class="stringliteral">&quot;@move_camera:<sp/>Full<sp/>camera&apos;s<sp/>turn.&quot;</highlight><highlight class="normal">);</highlight></codeline>
 <codeline lineno="106"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std_msgs::Bool<sp/>res;</highlight></codeline>
 <codeline lineno="107"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>res.data<sp/>=<sp/>1;</highlight></codeline>
 <codeline lineno="108"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>turn<sp/>=<sp/>1;</highlight></codeline>
