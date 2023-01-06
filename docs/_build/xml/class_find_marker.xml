@@ -1,0 +1,431 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="class_find_marker" kind="class" language="C++" prot="public">
+    <compoundname>FindMarker</compoundname>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="class_find_marker_1aaf9b480032aaa113b4aabab0bb052566" prot="private" static="no" mutable="no">
+        <type>ros::NodeHandle</type>
+        <definition>ros::NodeHandle FindMarker::nh</definition>
+        <argsstring></argsstring>
+        <name>nh</name>
+        <briefdescription>
+<para>ROS node handle. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/root/ros_ws/src/patrolling_robot/src/find_markers.cpp" line="62" column="19" bodyfile="/root/ros_ws/src/patrolling_robot/src/find_markers.cpp" bodystart="62" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_find_marker_1a81a4a2582922b10fe7732f7fcb61c7bf" prot="private" static="no" mutable="no">
+        <type>ros::Subscriber</type>
+        <definition>ros::Subscriber FindMarker::imageSub</definition>
+        <argsstring></argsstring>
+        <name>imageSub</name>
+        <briefdescription>
+<para>ROS image subscriber. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/root/ros_ws/src/patrolling_robot/src/find_markers.cpp" line="63" column="19" bodyfile="/root/ros_ws/src/patrolling_robot/src/find_markers.cpp" bodystart="63" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_find_marker_1aa30ed640cb3aca3c669a06fbeebef27d" prot="private" static="no" mutable="no">
+        <type>ros::Subscriber</type>
+        <definition>ros::Subscriber FindMarker::turnSub</definition>
+        <argsstring></argsstring>
+        <name>turnSub</name>
+        <briefdescription>
+<para>ROS turn subscriber. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/root/ros_ws/src/patrolling_robot/src/find_markers.cpp" line="64" column="19" bodyfile="/root/ros_ws/src/patrolling_robot/src/find_markers.cpp" bodystart="64" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_find_marker_1a631eeb636b7682d7dd8c0a4b290b3303" prot="private" static="no" mutable="no">
+        <type>ros::Publisher</type>
+        <definition>ros::Publisher FindMarker::moveCamPub</definition>
+        <argsstring></argsstring>
+        <name>moveCamPub</name>
+        <briefdescription>
+<para>ROS publisher for moving the camera. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/root/ros_ws/src/patrolling_robot/src/find_markers.cpp" line="65" column="18" bodyfile="/root/ros_ws/src/patrolling_robot/src/find_markers.cpp" bodystart="65" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_find_marker_1a8e35fda1f347cf26361e63c4c779f9d9" prot="private" static="no" mutable="no">
+        <type>ros::Publisher</type>
+        <definition>ros::Publisher FindMarker::statPub</definition>
+        <argsstring></argsstring>
+        <name>statPub</name>
+        <briefdescription>
+<para>ROS publisher for statements. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/root/ros_ws/src/patrolling_robot/src/find_markers.cpp" line="66" column="18" bodyfile="/root/ros_ws/src/patrolling_robot/src/find_markers.cpp" bodystart="66" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_find_marker_1a2949e28053279f70b31a8b72e01826b1" prot="private" static="no" mutable="no">
+        <type>ros::ServiceClient</type>
+        <definition>ros::ServiceClient FindMarker::markerCli</definition>
+        <argsstring></argsstring>
+        <name>markerCli</name>
+        <briefdescription>
+<para>ROS client for marker_server. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/root/ros_ws/src/patrolling_robot/src/find_markers.cpp" line="67" column="22" bodyfile="/root/ros_ws/src/patrolling_robot/src/find_markers.cpp" bodystart="67" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_find_marker_1a7e16ea90e6661c4cda39a9c9c4d35637" prot="private" static="no" mutable="no">
+        <type>ros::ServiceClient</type>
+        <definition>ros::ServiceClient FindMarker::roomCli</definition>
+        <argsstring></argsstring>
+        <name>roomCli</name>
+        <briefdescription>
+<para>ROS client for room information service. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/root/ros_ws/src/patrolling_robot/src/find_markers.cpp" line="68" column="22" bodyfile="/root/ros_ws/src/patrolling_robot/src/find_markers.cpp" bodystart="68" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_find_marker_1a9b2b4a5a5cf8c3797ee1cd25b0c5a4b6" prot="private" static="no" mutable="no">
+        <type>ros::Timer</type>
+        <definition>ros::Timer FindMarker::timerPublishStatement</definition>
+        <argsstring></argsstring>
+        <name>timerPublishStatement</name>
+        <briefdescription>
+<para>ROS timer for publishing statements. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/root/ros_ws/src/patrolling_robot/src/find_markers.cpp" line="69" column="14" bodyfile="/root/ros_ws/src/patrolling_robot/src/find_markers.cpp" bodystart="69" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_find_marker_1aafbeec1a44bb671950aec48595ea21f6" prot="private" static="no" mutable="no">
+        <type>aruco::MarkerDetector</type>
+        <definition>aruco::MarkerDetector FindMarker::md</definition>
+        <argsstring></argsstring>
+        <name>md</name>
+        <briefdescription>
+<para>Aruco marker detector. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/root/ros_ws/src/patrolling_robot/src/find_markers.cpp" line="70" column="25" bodyfile="/root/ros_ws/src/patrolling_robot/src/find_markers.cpp" bodystart="70" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_find_marker_1a52d4b23afd4e3b769d522db245e6277b" prot="private" static="no" mutable="no">
+        <type>std::vector&lt; int &gt;</type>
+        <definition>std::vector&lt;int&gt; FindMarker::markersDetected</definition>
+        <argsstring></argsstring>
+        <name>markersDetected</name>
+        <briefdescription>
+<para>Vector of detected marker IDs. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/root/ros_ws/src/patrolling_robot/src/find_markers.cpp" line="71" column="15" bodyfile="/root/ros_ws/src/patrolling_robot/src/find_markers.cpp" bodystart="71" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_find_marker_1ae4f02d362fef7ac91fae0719f7a33a69" prot="private" static="no" mutable="no">
+        <type>std::mutex</type>
+        <definition>std::mutex FindMarker::mutex</definition>
+        <argsstring></argsstring>
+        <name>mutex</name>
+        <briefdescription>
+<para>Mutex for synchronizing access to markersDetected. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/root/ros_ws/src/patrolling_robot/src/find_markers.cpp" line="72" column="14" bodyfile="/root/ros_ws/src/patrolling_robot/src/find_markers.cpp" bodystart="72" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_find_marker_1a7fa269abd4a7a8594bb257e50363670e" prot="private" static="no" mutable="no">
+        <type>int</type>
+        <definition>int FindMarker::turn</definition>
+        <argsstring></argsstring>
+        <name>turn</name>
+        <initializer>= 0</initializer>
+        <briefdescription>
+<para>Number of complete turns. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/root/ros_ws/src/patrolling_robot/src/find_markers.cpp" line="73" column="7" bodyfile="/root/ros_ws/src/patrolling_robot/src/find_markers.cpp" bodystart="73" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_find_marker_1a206892547314cdf98f5c66ede07b17a1" prot="private" static="no" mutable="no">
+        <type>int</type>
+        <definition>int FindMarker::nMarker</definition>
+        <argsstring></argsstring>
+        <name>nMarker</name>
+        <initializer>= 0</initializer>
+        <briefdescription>
+<para>Total number of markers to detect. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/root/ros_ws/src/patrolling_robot/src/find_markers.cpp" line="74" column="7" bodyfile="/root/ros_ws/src/patrolling_robot/src/find_markers.cpp" bodystart="74" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="class_find_marker_1a9e1da6c7f79c636eb996a8ae3edcf69a" prot="public" static="no" mutable="no">
+        <type>std::vector&lt; std::pair&lt; std::string, std::string &gt; &gt;</type>
+        <definition>std::vector&lt;std::pair&lt;std::string, std::string&gt; &gt; FindMarker::statPairVec</definition>
+        <argsstring></argsstring>
+        <name>statPairVec</name>
+        <briefdescription>
+<para>Vector of pairs of status information. The first element is the location, the second the door. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/root/ros_ws/src/patrolling_robot/src/find_markers.cpp" line="77" column="15" bodyfile="/root/ros_ws/src/patrolling_robot/src/find_markers.cpp" bodystart="77" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="class_find_marker_1a353834808a2bac40e8f50af8ec1b2ccf" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>FindMarker::FindMarker</definition>
+        <argsstring>()</argsstring>
+        <name>FindMarker</name>
+        <briefdescription>
+<para>Constructor for <ref refid="class_find_marker" kindref="compound">FindMarker</ref> class. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>This constructor sets up the ROS subscribers, publishers, and service clients, and initializes the marker detector. It also sets up the OpenCV window for displaying images. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/root/ros_ws/src/patrolling_robot/src/find_markers.cpp" line="85" column="3" bodyfile="/root/ros_ws/src/patrolling_robot/src/find_markers.cpp" bodystart="85" bodyend="102"/>
+      </memberdef>
+      <memberdef kind="function" id="class_find_marker_1a4f028f5ac957a280ad45305ef4784a91" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>FindMarker::~FindMarker</definition>
+        <argsstring>()</argsstring>
+        <name>~FindMarker</name>
+        <briefdescription>
+<para>Destructor for <ref refid="class_find_marker" kindref="compound">FindMarker</ref> class. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>This destructor closes the OpenCV window. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/root/ros_ws/src/patrolling_robot/src/find_markers.cpp" line="109" column="3" bodyfile="/root/ros_ws/src/patrolling_robot/src/find_markers.cpp" bodystart="109" bodyend="111"/>
+      </memberdef>
+      <memberdef kind="function" id="class_find_marker_1ad386aaf259ced2cf6a73032a6b9fb093" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void FindMarker::ImageCb</definition>
+        <argsstring>(const sensor_msgs::ImageConstPtr &amp;imageFeed)</argsstring>
+        <name>ImageCb</name>
+        <param>
+          <type>const sensor_msgs::ImageConstPtr &amp;</type>
+          <declname>imageFeed</declname>
+        </param>
+        <briefdescription>
+<para>Callback function for image data. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>This function processes the image data to detect markers, and stores the detected marker IDs in the markersDetected vector. It also calls the marker information and set room position services, and displays the image with the detected markers on the OpenCV window.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>imageFeed</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The image data. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/root/ros_ws/src/patrolling_robot/src/find_markers.cpp" line="123" column="8" bodyfile="/root/ros_ws/src/patrolling_robot/src/find_markers.cpp" bodystart="123" bodyend="161"/>
+      </memberdef>
+      <memberdef kind="function" id="class_find_marker_1aad4858c0d305ed6ba7ed4757a21ea8f2" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void FindMarker::TurnCb</definition>
+        <argsstring>(const std_msgs::Bool &amp;trigger)</argsstring>
+        <name>TurnCb</name>
+        <param>
+          <type>const std_msgs::Bool &amp;</type>
+          <declname>trigger</declname>
+        </param>
+        <briefdescription>
+<para>Callback function for camera turning trigger. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>This function increments the turn variable when the trigger is received.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>trigger</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The camera turning trigger. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/root/ros_ws/src/patrolling_robot/src/find_markers.cpp" line="170" column="8" bodyfile="/root/ros_ws/src/patrolling_robot/src/find_markers.cpp" bodystart="170" bodyend="173"/>
+      </memberdef>
+      <memberdef kind="function" id="class_find_marker_1a1e70ccc8dcbeedaee4fa0a2c07e7f472" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void FindMarker::Loop</definition>
+        <argsstring>()</argsstring>
+        <name>Loop</name>
+        <briefdescription>
+<para>Function for sending camera movement commands based on the current turn. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>This function sends a camera movement command based on the current value of the turn variable.</para>
+<para>The camera movement command is sent to the moveCamPub publisher. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/root/ros_ws/src/patrolling_robot/src/find_markers.cpp" line="183" column="8" bodyfile="/root/ros_ws/src/patrolling_robot/src/find_markers.cpp" bodystart="183" bodyend="195"/>
+      </memberdef>
+      <memberdef kind="function" id="class_find_marker_1a9c631a030cd0634501116fa4480d0a26" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void FindMarker::CamCommand</definition>
+        <argsstring>(float omega, float raise, float pitch)</argsstring>
+        <name>CamCommand</name>
+        <param>
+          <type>float</type>
+          <declname>omega</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>raise</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>pitch</declname>
+        </param>
+        <briefdescription>
+<para>Function for sending camera movement commands. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>This function sends a camera movement command with the specified angles to the moveCamPub publisher.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>omega</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The rotational angle about the vertical axis in radians. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>raise</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The distance of elevation in meters. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>pitch</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The angle of inclination in radians. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/root/ros_ws/src/patrolling_robot/src/find_markers.cpp" line="207" column="8" bodyfile="/root/ros_ws/src/patrolling_robot/src/find_markers.cpp" bodystart="207" bodyend="213"/>
+      </memberdef>
+      <memberdef kind="function" id="class_find_marker_1ae82f95c5415b0a52f58c691930772b42" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>int</type>
+        <definition>int FindMarker::MarkersFound</definition>
+        <argsstring>()</argsstring>
+        <name>MarkersFound</name>
+        <briefdescription>
+<para>Function for checking if all markers have been detected. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>This function returns 1 if all markers have been detected, and 0 otherwise.</para>
+<para><simplesect kind="return"><para>1 if all markers have been detected, 0 otherwise. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/root/ros_ws/src/patrolling_robot/src/find_markers.cpp" line="222" column="7" bodyfile="/root/ros_ws/src/patrolling_robot/src/find_markers.cpp" bodystart="222" bodyend="226"/>
+      </memberdef>
+      <memberdef kind="function" id="class_find_marker_1a9e117009cc5f8737a8490bd792a5595e" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void FindMarker::PublishStatement</definition>
+        <argsstring>()</argsstring>
+        <name>PublishStatement</name>
+        <briefdescription>
+<para>Function for publishing statements. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>This function publishes statements stored in the statPairVec vector to the statPub publisher, and removes the published statements from the vector. The operations on the statPairVec are protected by a mutex. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/root/ros_ws/src/patrolling_robot/src/find_markers.cpp" line="235" column="8" bodyfile="/root/ros_ws/src/patrolling_robot/src/find_markers.cpp" bodystart="235" bodyend="246"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>A class for detecting markers in images and publishing the results. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>This class is able to find Aruco markers around the robot, it subscribes to image and turn data, processes the data to detect markers, and publishes the results. It publishes to the move_camera node to let the markers enter in the field of view of the camera, more in details, the method Loop is used to decide how the camera must move and the method CamCommand is used for sending the camera commands. Moreover, it publishes asynchronously the statements to the state_machine node, because one marker detection can correspond to multiple statements. It also calls the set_room_position server to store the x y positions of each room. </para>
+    </detaileddescription>
+    <location file="/root/ros_ws/src/patrolling_robot/src/find_markers.cpp" line="60" column="17" bodyfile="/root/ros_ws/src/patrolling_robot/src/find_markers.cpp" bodystart="60" bodyend="247"/>
+    <listofallmembers>
+      <member refid="class_find_marker_1a9c631a030cd0634501116fa4480d0a26" prot="public" virt="non-virtual"><scope>FindMarker</scope><name>CamCommand</name></member>
+      <member refid="class_find_marker_1a353834808a2bac40e8f50af8ec1b2ccf" prot="public" virt="non-virtual"><scope>FindMarker</scope><name>FindMarker</name></member>
+      <member refid="class_find_marker_1ad386aaf259ced2cf6a73032a6b9fb093" prot="public" virt="non-virtual"><scope>FindMarker</scope><name>ImageCb</name></member>
+      <member refid="class_find_marker_1a81a4a2582922b10fe7732f7fcb61c7bf" prot="private" virt="non-virtual"><scope>FindMarker</scope><name>imageSub</name></member>
+      <member refid="class_find_marker_1a1e70ccc8dcbeedaee4fa0a2c07e7f472" prot="public" virt="non-virtual"><scope>FindMarker</scope><name>Loop</name></member>
+      <member refid="class_find_marker_1a2949e28053279f70b31a8b72e01826b1" prot="private" virt="non-virtual"><scope>FindMarker</scope><name>markerCli</name></member>
+      <member refid="class_find_marker_1a52d4b23afd4e3b769d522db245e6277b" prot="private" virt="non-virtual"><scope>FindMarker</scope><name>markersDetected</name></member>
+      <member refid="class_find_marker_1ae82f95c5415b0a52f58c691930772b42" prot="public" virt="non-virtual"><scope>FindMarker</scope><name>MarkersFound</name></member>
+      <member refid="class_find_marker_1aafbeec1a44bb671950aec48595ea21f6" prot="private" virt="non-virtual"><scope>FindMarker</scope><name>md</name></member>
+      <member refid="class_find_marker_1a631eeb636b7682d7dd8c0a4b290b3303" prot="private" virt="non-virtual"><scope>FindMarker</scope><name>moveCamPub</name></member>
+      <member refid="class_find_marker_1ae4f02d362fef7ac91fae0719f7a33a69" prot="private" virt="non-virtual"><scope>FindMarker</scope><name>mutex</name></member>
+      <member refid="class_find_marker_1aaf9b480032aaa113b4aabab0bb052566" prot="private" virt="non-virtual"><scope>FindMarker</scope><name>nh</name></member>
+      <member refid="class_find_marker_1a206892547314cdf98f5c66ede07b17a1" prot="private" virt="non-virtual"><scope>FindMarker</scope><name>nMarker</name></member>
+      <member refid="class_find_marker_1a9e117009cc5f8737a8490bd792a5595e" prot="public" virt="non-virtual"><scope>FindMarker</scope><name>PublishStatement</name></member>
+      <member refid="class_find_marker_1a7e16ea90e6661c4cda39a9c9c4d35637" prot="private" virt="non-virtual"><scope>FindMarker</scope><name>roomCli</name></member>
+      <member refid="class_find_marker_1a9e1da6c7f79c636eb996a8ae3edcf69a" prot="public" virt="non-virtual"><scope>FindMarker</scope><name>statPairVec</name></member>
+      <member refid="class_find_marker_1a8e35fda1f347cf26361e63c4c779f9d9" prot="private" virt="non-virtual"><scope>FindMarker</scope><name>statPub</name></member>
+      <member refid="class_find_marker_1a9b2b4a5a5cf8c3797ee1cd25b0c5a4b6" prot="private" virt="non-virtual"><scope>FindMarker</scope><name>timerPublishStatement</name></member>
+      <member refid="class_find_marker_1a7fa269abd4a7a8594bb257e50363670e" prot="private" virt="non-virtual"><scope>FindMarker</scope><name>turn</name></member>
+      <member refid="class_find_marker_1aad4858c0d305ed6ba7ed4757a21ea8f2" prot="public" virt="non-virtual"><scope>FindMarker</scope><name>TurnCb</name></member>
+      <member refid="class_find_marker_1aa30ed640cb3aca3c669a06fbeebef27d" prot="private" virt="non-virtual"><scope>FindMarker</scope><name>turnSub</name></member>
+      <member refid="class_find_marker_1a4f028f5ac957a280ad45305ef4784a91" prot="public" virt="non-virtual"><scope>FindMarker</scope><name>~FindMarker</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

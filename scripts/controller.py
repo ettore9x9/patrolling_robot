@@ -11,6 +11,7 @@ from move_base_msgs.msg import MoveBaseAction, MoveBaseGoal
 from actionlib import SimpleActionServer
 from surveillance_robot.msg import ControlAction, ControlFeedback, ControlResult
 from surveillance_robot import architecture_name_mapper as anm
+from patrolling_robot.msg import MoveCamera
 
 LOG_TAG = anm.NODE_CONTROLLER   # Tag for identifying logs producer.
 
@@ -22,6 +23,7 @@ class ControllingAction(object):
         self.feedback_counter = 0
         self.is_active = False
         self.client = actionlib.SimpleActionClient('/move_base', MoveBaseAction)
+        self.movecam_pub = rospy.Publisher('/camera_command', MoveCamera, queue_size=1)
         self._as = SimpleActionServer(anm.ACTION_CONTROLLER,ControlAction ,execute_cb=self.execute_callback, auto_start=False)
         self._as.start()
 
@@ -79,28 +81,37 @@ class ControllingAction(object):
 
     def done_cb(self, status, result):
         # Function executed when the communication ends.
-        
-        self.is_active = False   # The action client communication is not active.
 
         # Prints on the info window the status returned by the action server communication.
         if status == 2:
             rospy.loginfo("Goal n "+str(self.goal_counter)+" received a cancel request.")
+            self.is_active = False   # The action client communication is not active.
             return
 
         if status == 3:
             rospy.loginfo("Goal n "+str(self.goal_counter)+" reached.")
+            moveCam = MoveCamera()
+            moveCam.omega = 2.0
+            self.movecam_pub.publish(moveCam)
+            rospy.sleep(4)
+            moveCam.omega = 0.0
+            self.movecam_pub.publish(moveCam)
+            self.is_active = False   # The action client communication is not active.
             return
 
         if status == 4:
             rospy.loginfo("Goal n "+str(self.goal_counter)+" was aborted.")
+            self.is_active = False   # The action client communication is not active.
             return
 
         if status == 5:
             rospy.loginfo("Goal n "+str(self.goal_counter)+" has been rejected.")
+            self.is_active = False   # The action client communication is not active.
             return
 
         if status == 8:
             rospy.loginfo("Goal n "+str(self.goal_counter)+" received a cancel request.")
+            self.is_active = False   # The action client communication is not active.
             return
 
     def reach_goal(self, x, y):

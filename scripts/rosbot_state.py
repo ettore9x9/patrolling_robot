@@ -8,7 +8,7 @@ from nav_msgs.msg import Odometry
 class RoomPositionManager:
 
 	def __init__(self):
-		rospy.Service("/set_room_position", SetRoomPosition, self.add_new_room)
+		rospy.Service("/info/set_room_position", SetRoomPosition, self.add_new_room)
 		rospy.Service("/ask_position", AskPosition, self.find_position)
 		rospy.Subscriber("/odom", Odometry, self.update_robot_pose)
 

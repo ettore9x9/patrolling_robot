@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>find_marker module &mdash; patrolling_robot 0.0.1 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="_static/graphviz.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="marker_server module" href="marker_server.html" />
+    <link rel="prev" title="src" href="src.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html" class="icon icon-home"> patrolling_robot
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="scripts.html">scripts</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="src.html">src</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">find_marker module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="marker_server.html">marker_server module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="move_camera.html">move_camera module</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">patrolling_robot</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a></li>
+          <li class="breadcrumb-item"><a href="src.html">src</a></li>
+      <li class="breadcrumb-item active">find_marker module</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/find_markers.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="section" id="find-marker-module">
+<h1>find_marker module<a class="headerlink" href="#find-marker-module" title="Permalink to this heading"></a></h1>
+<p>Node to find the markers in the environment. </p>
+<p>
+Subscribes to: <ul class="simple">
+<li><p>/camera/rgb/image_raw</p></li>
+<li><p>/camera/camera_turn</p></li>
+</ul>
+<dl class="simple">
+<dt><strong>Author</strong></dt><dd><p>Ettore Sani </p>
+</dd>
+<dt><strong>Version</strong></dt><dd><p>0.1 </p>
+</dd>
+<dt><strong>Date</strong></dt><dd><p>06/01/2023</p>
+</dd>
+</dl>
+</p>
+<p>Publishes to: <ul class="simple">
+<li><p>/camera/camera_command</p></li>
+<li><p>/map/statement</p></li>
+</ul>
+</p>
+<p>Client of: <ul class="simple">
+<li><p>/room_info</p></li>
+<li><p>/info/set_room_position</p></li>
+</ul>
+</p>
+<p>Description :</p>
+<p>Node to detect markers around the robot by moving the camera. It request to the marker_server node to know the markrer meaning, and publishes the received informations to the nodes state_machine and rosbot_state. </p>
+<dl class="field-list simple">
+<dt class="field-odd">param nMarker</dt>
+<dd class="field-odd"><p><strong>[in]</strong> number of markers to detect</p>
+</dd>
+</dl>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-functions">Functions</p>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv44mainiPPc">
+<span id="_CPPv34mainiPPc"></span><span id="_CPPv24mainiPPc"></span><span id="main__i.cPP"></span><span class="target" id="find__markers_8cpp_1a3c04138a5bfe5d72780bb7e82a18e627"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">main</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">argc</span></span>, <span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">argv</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv44mainiPPc" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Main function for the find_markers node. </p>
+<p>This function creates an instance of the <a class="reference internal" href="#class_find_marker"><span class="std std-ref">FindMarker</span></a> class and waits for 4 seconds, waiting for the state_machine node. It then enters a loop where it sends camera movement commands and spins the ROS event loop until all markers have been detected.</p>
+<p>After all markers have been detected, the camera is stopped and the statPairVec vector is pushed a blank pair, this means that the ontology is complete. The loop then continues until the statPairVec vector is empty, at which point the function exits.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>argc</strong> – The number of command line arguments. </p></li>
+<li><p><strong>argv</strong> – The array of command line arguments.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>0 on success, non-zero otherwise. </p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-variables">Variables</p>
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv414c_opencvWindow">
+<span id="_CPPv314c_opencvWindow"></span><span id="_CPPv214c_opencvWindow"></span><span id="c_opencvWindow__ssC"></span><span class="target" id="find__markers_8cpp_1a759bbc599bd17082d1f9c3d8f896278c"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">c_opencvWindow</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="s"><span class="pre">&quot;Image</span> <span class="pre">window&quot;</span></span><a class="headerlink" href="#_CPPv414c_opencvWindow" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Constant string for the name of the OpenCV window. </p>
+</dd></dl>
+
+</div>
+<dl class="cpp class">
+<dt class="sig sig-object cpp" id="_CPPv410FindMarker">
+<span id="_CPPv310FindMarker"></span><span id="_CPPv210FindMarker"></span><span id="FindMarker"></span><span class="target" id="class_find_marker"></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">FindMarker</span></span></span><a class="headerlink" href="#_CPPv410FindMarker" title="Permalink to this definition"></a><br /></dt>
+<dd><p>A class for detecting markers in images and publishing the results. </p>
+<p>This class is able to find Aruco markers around the robot, it subscribes to image and turn data, processes the data to detect markers, and publishes the results. It publishes to the move_camera node to let the markers enter in the field of view of the camera, more in details, the method Loop is used to decide how the camera must move and the method CamCommand is used for sending the camera commands. Moreover, it publishes asynchronously the statements to the state_machine node, because one marker detection can correspond to multiple statements. It also calls the set_room_position server to store the x y positions of each room. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N10FindMarker10FindMarkerEv">
+<span id="_CPPv3N10FindMarker10FindMarkerEv"></span><span id="_CPPv2N10FindMarker10FindMarkerEv"></span><span id="FindMarker::FindMarker"></span><span class="target" id="class_find_marker_1a353834808a2bac40e8f50af8ec1b2ccf"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">FindMarker</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N10FindMarker10FindMarkerEv" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Constructor for <a class="reference internal" href="#class_find_marker"><span class="std std-ref">FindMarker</span></a> class. </p>
+<p>This constructor sets up the ROS subscribers, publishers, and service clients, and initializes the marker detector. It also sets up the OpenCV window for displaying images. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N10FindMarkerD0Ev">
+<span id="_CPPv3N10FindMarkerD0Ev"></span><span id="_CPPv2N10FindMarkerD0Ev"></span><span id="FindMarker::~FindMarker"></span><span class="target" id="class_find_marker_1a4f028f5ac957a280ad45305ef4784a91"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">~FindMarker</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N10FindMarkerD0Ev" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Destructor for <a class="reference internal" href="#class_find_marker"><span class="std std-ref">FindMarker</span></a> class. </p>
+<p>This destructor closes the OpenCV window. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N10FindMarker7ImageCbERKN11sensor_msgs13ImageConstPtrE">
+<span id="_CPPv3N10FindMarker7ImageCbERKN11sensor_msgs13ImageConstPtrE"></span><span id="_CPPv2N10FindMarker7ImageCbERKN11sensor_msgs13ImageConstPtrE"></span><span id="FindMarker::ImageCb__sensor_msgs::ImageConstPtrCR"></span><span class="target" id="class_find_marker_1ad386aaf259ced2cf6a73032a6b9fb093"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ImageCb</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">sensor_msgs</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">ImageConstPtr</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">imageFeed</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N10FindMarker7ImageCbERKN11sensor_msgs13ImageConstPtrE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Callback function for image data. </p>
+<p>This function processes the image data to detect markers, and stores the detected marker IDs in the markersDetected vector. It also calls the marker information and set room position services, and displays the image with the detected markers on the OpenCV window.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>imageFeed</strong> – The image data. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N10FindMarker6TurnCbERKN8std_msgs4BoolE">
+<span id="_CPPv3N10FindMarker6TurnCbERKN8std_msgs4BoolE"></span><span id="_CPPv2N10FindMarker6TurnCbERKN8std_msgs4BoolE"></span><span id="FindMarker::TurnCb__std_msgs::BoolCR"></span><span class="target" id="class_find_marker_1aad4858c0d305ed6ba7ed4757a21ea8f2"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TurnCb</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std_msgs</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">Bool</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">trigger</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N10FindMarker6TurnCbERKN8std_msgs4BoolE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Callback function for camera turning trigger. </p>
+<p>This function increments the turn variable when the trigger is received.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>trigger</strong> – The camera turning trigger. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N10FindMarker4LoopEv">
+<span id="_CPPv3N10FindMarker4LoopEv"></span><span id="_CPPv2N10FindMarker4LoopEv"></span><span id="FindMarker::Loop"></span><span class="target" id="class_find_marker_1a1e70ccc8dcbeedaee4fa0a2c07e7f472"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Loop</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N10FindMarker4LoopEv" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Function for sending camera movement commands based on the current turn. </p>
+<p>This function sends a camera movement command based on the current value of the turn variable.</p>
+<p>The camera movement command is sent to the moveCamPub publisher. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N10FindMarker10CamCommandEfff">
+<span id="_CPPv3N10FindMarker10CamCommandEfff"></span><span id="_CPPv2N10FindMarker10CamCommandEfff"></span><span id="FindMarker::CamCommand__float.float.float"></span><span class="target" id="class_find_marker_1a9c631a030cd0634501116fa4480d0a26"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">CamCommand</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">float</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">omega</span></span>, <span class="kt"><span class="pre">float</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">raise</span></span>, <span class="kt"><span class="pre">float</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">pitch</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N10FindMarker10CamCommandEfff" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Function for sending camera movement commands. </p>
+<p>This function sends a camera movement command with the specified angles to the moveCamPub publisher.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>omega</strong> – The rotational angle about the vertical axis in radians. </p></li>
+<li><p><strong>raise</strong> – The distance of elevation in meters. </p></li>
+<li><p><strong>pitch</strong> – The angle of inclination in radians. </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N10FindMarker12MarkersFoundEv">
+<span id="_CPPv3N10FindMarker12MarkersFoundEv"></span><span id="_CPPv2N10FindMarker12MarkersFoundEv"></span><span id="FindMarker::MarkersFound"></span><span class="target" id="class_find_marker_1ae82f95c5415b0a52f58c691930772b42"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">MarkersFound</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N10FindMarker12MarkersFoundEv" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Function for checking if all markers have been detected. </p>
+<p>This function returns 1 if all markers have been detected, and 0 otherwise.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>1 if all markers have been detected, 0 otherwise. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N10FindMarker16PublishStatementEv">
+<span id="_CPPv3N10FindMarker16PublishStatementEv"></span><span id="_CPPv2N10FindMarker16PublishStatementEv"></span><span id="FindMarker::PublishStatement"></span><span class="target" id="class_find_marker_1a9e117009cc5f8737a8490bd792a5595e"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">PublishStatement</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N10FindMarker16PublishStatementEv" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Function for publishing statements. </p>
+<p>This function publishes statements stored in the statPairVec vector to the statPub publisher, and removes the published statements from the vector. The operations on the statPairVec are protected by a mutex. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N10FindMarker11statPairVecE">
+<span id="_CPPv3N10FindMarker11statPairVecE"></span><span id="_CPPv2N10FindMarker11statPairVecE"></span><span id="FindMarker::statPairVec__std::vector:std::pair:ss.ss::"></span><span class="target" id="class_find_marker_1a9e1da6c7f79c636eb996a8ae3edcf69a"></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">pair</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="p"><span class="pre">&gt;</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">statPairVec</span></span></span><a class="headerlink" href="#_CPPv4N10FindMarker11statPairVecE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Vector of pairs of status information. The first element is the location, the second the door. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-private-members">Private Members</p>
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N10FindMarker2nhE">
+<span id="_CPPv3N10FindMarker2nhE"></span><span id="_CPPv2N10FindMarker2nhE"></span><span id="FindMarker::nh__ros::NodeHandle"></span><span class="target" id="class_find_marker_1aaf9b480032aaa113b4aabab0bb052566"></span><span class="n"><span class="pre">ros</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">NodeHandle</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">nh</span></span></span><a class="headerlink" href="#_CPPv4N10FindMarker2nhE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>ROS node handle. </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N10FindMarker8imageSubE">
+<span id="_CPPv3N10FindMarker8imageSubE"></span><span id="_CPPv2N10FindMarker8imageSubE"></span><span id="FindMarker::imageSub__ros::Subscriber"></span><span class="target" id="class_find_marker_1a81a4a2582922b10fe7732f7fcb61c7bf"></span><span class="n"><span class="pre">ros</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">Subscriber</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">imageSub</span></span></span><a class="headerlink" href="#_CPPv4N10FindMarker8imageSubE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>ROS image subscriber. </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N10FindMarker7turnSubE">
+<span id="_CPPv3N10FindMarker7turnSubE"></span><span id="_CPPv2N10FindMarker7turnSubE"></span><span id="FindMarker::turnSub__ros::Subscriber"></span><span class="target" id="class_find_marker_1aa30ed640cb3aca3c669a06fbeebef27d"></span><span class="n"><span class="pre">ros</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">Subscriber</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">turnSub</span></span></span><a class="headerlink" href="#_CPPv4N10FindMarker7turnSubE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>ROS turn subscriber. </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N10FindMarker10moveCamPubE">
+<span id="_CPPv3N10FindMarker10moveCamPubE"></span><span id="_CPPv2N10FindMarker10moveCamPubE"></span><span id="FindMarker::moveCamPub__ros::Publisher"></span><span class="target" id="class_find_marker_1a631eeb636b7682d7dd8c0a4b290b3303"></span><span class="n"><span class="pre">ros</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">Publisher</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">moveCamPub</span></span></span><a class="headerlink" href="#_CPPv4N10FindMarker10moveCamPubE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>ROS publisher for moving the camera. </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N10FindMarker7statPubE">
+<span id="_CPPv3N10FindMarker7statPubE"></span><span id="_CPPv2N10FindMarker7statPubE"></span><span id="FindMarker::statPub__ros::Publisher"></span><span class="target" id="class_find_marker_1a8e35fda1f347cf26361e63c4c779f9d9"></span><span class="n"><span class="pre">ros</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">Publisher</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">statPub</span></span></span><a class="headerlink" href="#_CPPv4N10FindMarker7statPubE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>ROS publisher for statements. </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N10FindMarker9markerCliE">
+<span id="_CPPv3N10FindMarker9markerCliE"></span><span id="_CPPv2N10FindMarker9markerCliE"></span><span id="FindMarker::markerCli__ros::ServiceClient"></span><span class="target" id="class_find_marker_1a2949e28053279f70b31a8b72e01826b1"></span><span class="n"><span class="pre">ros</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">ServiceClient</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">markerCli</span></span></span><a class="headerlink" href="#_CPPv4N10FindMarker9markerCliE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>ROS client for marker_server. </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N10FindMarker7roomCliE">
+<span id="_CPPv3N10FindMarker7roomCliE"></span><span id="_CPPv2N10FindMarker7roomCliE"></span><span id="FindMarker::roomCli__ros::ServiceClient"></span><span class="target" id="class_find_marker_1a7e16ea90e6661c4cda39a9c9c4d35637"></span><span class="n"><span class="pre">ros</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">ServiceClient</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">roomCli</span></span></span><a class="headerlink" href="#_CPPv4N10FindMarker7roomCliE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>ROS client for room information service. </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N10FindMarker21timerPublishStatementE">
+<span id="_CPPv3N10FindMarker21timerPublishStatementE"></span><span id="_CPPv2N10FindMarker21timerPublishStatementE"></span><span id="FindMarker::timerPublishStatement__ros::Timer"></span><span class="target" id="class_find_marker_1a9b2b4a5a5cf8c3797ee1cd25b0c5a4b6"></span><span class="n"><span class="pre">ros</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">Timer</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">timerPublishStatement</span></span></span><a class="headerlink" href="#_CPPv4N10FindMarker21timerPublishStatementE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>ROS timer for publishing statements. </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N10FindMarker2mdE">
+<span id="_CPPv3N10FindMarker2mdE"></span><span id="_CPPv2N10FindMarker2mdE"></span><span id="FindMarker::md__aruco::MarkerDetector"></span><span class="target" id="class_find_marker_1aafbeec1a44bb671950aec48595ea21f6"></span><span class="n"><span class="pre">aruco</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">MarkerDetector</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">md</span></span></span><a class="headerlink" href="#_CPPv4N10FindMarker2mdE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Aruco marker detector. </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N10FindMarker15markersDetectedE">
+<span id="_CPPv3N10FindMarker15markersDetectedE"></span><span id="_CPPv2N10FindMarker15markersDetectedE"></span><span id="FindMarker::markersDetected__std::vector:i:"></span><span class="target" id="class_find_marker_1a52d4b23afd4e3b769d522db245e6277b"></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><span class="kt"><span class="pre">int</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">markersDetected</span></span></span><a class="headerlink" href="#_CPPv4N10FindMarker15markersDetectedE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Vector of detected marker IDs. </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N10FindMarker5mutexE">
+<span id="_CPPv3N10FindMarker5mutexE"></span><span id="_CPPv2N10FindMarker5mutexE"></span><span id="FindMarker::mutex__std::mutex"></span><span class="target" id="class_find_marker_1ae4f02d362fef7ac91fae0719f7a33a69"></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">mutex</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">mutex</span></span></span><a class="headerlink" href="#_CPPv4N10FindMarker5mutexE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Mutex for synchronizing access to markersDetected. </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N10FindMarker4turnE">
+<span id="_CPPv3N10FindMarker4turnE"></span><span id="_CPPv2N10FindMarker4turnE"></span><span id="FindMarker::turn__i"></span><span class="target" id="class_find_marker_1a7fa269abd4a7a8594bb257e50363670e"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">turn</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><a class="headerlink" href="#_CPPv4N10FindMarker4turnE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Number of complete turns. </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N10FindMarker7nMarkerE">
+<span id="_CPPv3N10FindMarker7nMarkerE"></span><span id="_CPPv2N10FindMarker7nMarkerE"></span><span id="FindMarker::nMarker__i"></span><span class="target" id="class_find_marker_1a206892547314cdf98f5c66ede07b17a1"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">nMarker</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><a class="headerlink" href="#_CPPv4N10FindMarker7nMarkerE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Total number of markers to detect. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+</div>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="src.html" class="btn btn-neutral float-left" title="src" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="marker_server.html" class="btn btn-neutral float-right" title="marker_server module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Ettore Sani.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

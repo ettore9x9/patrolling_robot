@@ -1,0 +1,53 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygenindex xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="index.xsd" version="1.8.17">
+  <compound refid="class_find_marker" kind="class"><name>FindMarker</name>
+    <member refid="class_find_marker_1aaf9b480032aaa113b4aabab0bb052566" kind="variable"><name>nh</name></member>
+    <member refid="class_find_marker_1a81a4a2582922b10fe7732f7fcb61c7bf" kind="variable"><name>imageSub</name></member>
+    <member refid="class_find_marker_1aa30ed640cb3aca3c669a06fbeebef27d" kind="variable"><name>turnSub</name></member>
+    <member refid="class_find_marker_1a631eeb636b7682d7dd8c0a4b290b3303" kind="variable"><name>moveCamPub</name></member>
+    <member refid="class_find_marker_1a8e35fda1f347cf26361e63c4c779f9d9" kind="variable"><name>statPub</name></member>
+    <member refid="class_find_marker_1a2949e28053279f70b31a8b72e01826b1" kind="variable"><name>markerCli</name></member>
+    <member refid="class_find_marker_1a7e16ea90e6661c4cda39a9c9c4d35637" kind="variable"><name>roomCli</name></member>
+    <member refid="class_find_marker_1a9b2b4a5a5cf8c3797ee1cd25b0c5a4b6" kind="variable"><name>timerPublishStatement</name></member>
+    <member refid="class_find_marker_1aafbeec1a44bb671950aec48595ea21f6" kind="variable"><name>md</name></member>
+    <member refid="class_find_marker_1a52d4b23afd4e3b769d522db245e6277b" kind="variable"><name>markersDetected</name></member>
+    <member refid="class_find_marker_1ae4f02d362fef7ac91fae0719f7a33a69" kind="variable"><name>mutex</name></member>
+    <member refid="class_find_marker_1a7fa269abd4a7a8594bb257e50363670e" kind="variable"><name>turn</name></member>
+    <member refid="class_find_marker_1a206892547314cdf98f5c66ede07b17a1" kind="variable"><name>nMarker</name></member>
+    <member refid="class_find_marker_1a9e1da6c7f79c636eb996a8ae3edcf69a" kind="variable"><name>statPairVec</name></member>
+    <member refid="class_find_marker_1a353834808a2bac40e8f50af8ec1b2ccf" kind="function"><name>FindMarker</name></member>
+    <member refid="class_find_marker_1a4f028f5ac957a280ad45305ef4784a91" kind="function"><name>~FindMarker</name></member>
+    <member refid="class_find_marker_1ad386aaf259ced2cf6a73032a6b9fb093" kind="function"><name>ImageCb</name></member>
+    <member refid="class_find_marker_1aad4858c0d305ed6ba7ed4757a21ea8f2" kind="function"><name>TurnCb</name></member>
+    <member refid="class_find_marker_1a1e70ccc8dcbeedaee4fa0a2c07e7f472" kind="function"><name>Loop</name></member>
+    <member refid="class_find_marker_1a9c631a030cd0634501116fa4480d0a26" kind="function"><name>CamCommand</name></member>
+    <member refid="class_find_marker_1ae82f95c5415b0a52f58c691930772b42" kind="function"><name>MarkersFound</name></member>
+    <member refid="class_find_marker_1a9e117009cc5f8737a8490bd792a5595e" kind="function"><name>PublishStatement</name></member>
+  </compound>
+  <compound refid="class_move_camera" kind="class"><name>MoveCamera</name>
+    <member refid="class_move_camera_1a06ab6901b91d4b60a50a55b8abdead6a" kind="variable"><name>nh</name></member>
+    <member refid="class_move_camera_1a34087b5458a5c75b6a77d5ab12245678" kind="variable"><name>commandSub</name></member>
+    <member refid="class_move_camera_1a97473afe3dd912a71b6c5d624ebdd674" kind="variable"><name>jointSub</name></member>
+    <member refid="class_move_camera_1a4d41e788a9bfc9545cfc66e562dc2497" kind="variable"><name>rotatePub</name></member>
+    <member refid="class_move_camera_1ab5c53c6cd9f33c7f93875c91c1ad1b0c" kind="variable"><name>raisePub</name></member>
+    <member refid="class_move_camera_1a54c459ce231cb8bd676cbc781450d3b3" kind="variable"><name>pitchPub</name></member>
+    <member refid="class_move_camera_1a2b4a9de46cbc7323519d2a601f85611b" kind="variable"><name>turnPub</name></member>
+    <member refid="class_move_camera_1aae71031c71ce75f7ee52181c0ec7cea7" kind="variable"><name>turn</name></member>
+    <member refid="class_move_camera_1a22eaf4579fd2cf3be091ec1c18c1fc4b" kind="function"><name>MoveCamera</name></member>
+    <member refid="class_move_camera_1a37a697910702a59fecc14d61759ed269" kind="function"><name>CamCb</name></member>
+    <member refid="class_move_camera_1a9869cc6bcfb5d5ca46e09919cc7dfec2" kind="function"><name>TurnCb</name></member>
+  </compound>
+  <compound refid="find__markers_8cpp" kind="file"><name>find_markers.cpp</name>
+    <member refid="find__markers_8cpp_1a759bbc599bd17082d1f9c3d8f896278c" kind="variable"><name>c_opencvWindow</name></member>
+    <member refid="find__markers_8cpp_1a3c04138a5bfe5d72780bb7e82a18e627" kind="function"><name>main</name></member>
+  </compound>
+  <compound refid="marker__server_8cpp" kind="file"><name>marker_server.cpp</name>
+    <member refid="marker__server_8cpp_1a571598aaef39afb63cf336b0077a4cae" kind="function"><name>markerCallback</name></member>
+    <member refid="marker__server_8cpp_1a3c04138a5bfe5d72780bb7e82a18e627" kind="function"><name>main</name></member>
+  </compound>
+  <compound refid="move__camera_8cpp" kind="file"><name>move_camera.cpp</name>
+    <member refid="move__camera_8cpp_1a3c04138a5bfe5d72780bb7e82a18e627" kind="function"><name>main</name></member>
+  </compound>
+  <compound refid="dir_68267d1309a1af8e8297ef4c3efbcdba" kind="dir"><name>/root/ros_ws/src/patrolling_robot/src</name>
+  </compound>
+</doxygenindex>

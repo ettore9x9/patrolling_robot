@@ -1,3 +1,10 @@
+/*! 
+ * \file marker_server.cpp 
+ * \brief Marker server node
+ * \author Carmine Recchiuto
+ * \version 0.1 
+ * \date 06/01/2023
+ */
 #include <ros/ros.h>
 #include <patrolling_robot/RoomConnection.h>
 #include <patrolling_robot/RoomInformation.h>

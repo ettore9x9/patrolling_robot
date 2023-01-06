@@ -1,0 +1,354 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="find__markers_8cpp" kind="file" language="C++">
+    <compoundname>find_markers.cpp</compoundname>
+    <includes local="no">ros/ros.h</includes>
+    <includes local="no">cv_bridge/cv_bridge.h</includes>
+    <includes local="no">opencv2/highgui/highgui.hpp</includes>
+    <includes local="no">aruco/aruco.h</includes>
+    <includes local="no">patrolling_robot/MoveCamera.h</includes>
+    <includes local="no">std_msgs/Bool.h</includes>
+    <includes local="no">patrolling_robot/RoomConnection.h</includes>
+    <includes local="no">patrolling_robot/RoomInformation.h</includes>
+    <includes local="no">patrolling_robot/SetRoomPosition.h</includes>
+    <includes local="no">surveillance_robot/Statement.h</includes>
+    <includes local="no">boost/optional.hpp</includes>
+    <includes local="no">mutex</includes>
+    <incdepgraph>
+      <node id="11">
+        <label>surveillance_robot/Statement.h</label>
+      </node>
+      <node id="1">
+        <label>/root/ros_ws/src/patrolling_robot/src/find_markers.cpp</label>
+        <link refid="find__markers_8cpp"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+      </node>
+      <node id="7">
+        <label>std_msgs/Bool.h</label>
+      </node>
+      <node id="9">
+        <label>patrolling_robot/RoomInformation.h</label>
+      </node>
+      <node id="3">
+        <label>cv_bridge/cv_bridge.h</label>
+      </node>
+      <node id="8">
+        <label>patrolling_robot/RoomConnection.h</label>
+      </node>
+      <node id="6">
+        <label>patrolling_robot/MoveCamera.h</label>
+      </node>
+      <node id="5">
+        <label>aruco/aruco.h</label>
+      </node>
+      <node id="10">
+        <label>patrolling_robot/SetRoomPosition.h</label>
+      </node>
+      <node id="2">
+        <label>ros/ros.h</label>
+      </node>
+      <node id="4">
+        <label>opencv2/highgui/highgui.hpp</label>
+      </node>
+      <node id="13">
+        <label>mutex</label>
+      </node>
+      <node id="12">
+        <label>boost/optional.hpp</label>
+      </node>
+    </incdepgraph>
+    <innerclass refid="class_find_marker" prot="public">FindMarker</innerclass>
+      <sectiondef kind="var">
+      <memberdef kind="variable" id="find__markers_8cpp_1a759bbc599bd17082d1f9c3d8f896278c" prot="public" static="yes" mutable="no">
+        <type>const std::string</type>
+        <definition>const std::string c_opencvWindow</definition>
+        <argsstring></argsstring>
+        <name>c_opencvWindow</name>
+        <initializer>= &quot;Image window&quot;</initializer>
+        <briefdescription>
+<para>Constant string for the name of the OpenCV window. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/root/ros_ws/src/patrolling_robot/src/find_markers.cpp" line="44" column="26" bodyfile="/root/ros_ws/src/patrolling_robot/src/find_markers.cpp" bodystart="44" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="find__markers_8cpp_1a3c04138a5bfe5d72780bb7e82a18e627" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int main</definition>
+        <argsstring>(int argc, char **argv)</argsstring>
+        <name>main</name>
+        <param>
+          <type>int</type>
+          <declname>argc</declname>
+        </param>
+        <param>
+          <type>char **</type>
+          <declname>argv</declname>
+        </param>
+        <briefdescription>
+<para>Main function for the find_markers node. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>This function creates an instance of the <ref refid="class_find_marker" kindref="compound">FindMarker</ref> class and waits for 4 seconds, waiting for the state_machine node. It then enters a loop where it sends camera movement commands and spins the ROS event loop until all markers have been detected.</para>
+<para>After all markers have been detected, the camera is stopped and the statPairVec vector is pushed a blank pair, this means that the ontology is complete. The loop then continues until the statPairVec vector is empty, at which point the function exits.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>argc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The number of command line arguments. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>argv</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The array of command line arguments.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>0 on success, non-zero otherwise. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/root/ros_ws/src/patrolling_robot/src/find_markers.cpp" line="267" column="5" bodyfile="/root/ros_ws/src/patrolling_robot/src/find_markers.cpp" bodystart="267" bodyend="284"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Node to find the markers in the environment. </para>
+    </briefdescription>
+    <detaileddescription>
+<para><simplesect kind="author"><para>Ettore Sani </para>
+</simplesect>
+<simplesect kind="version"><para>0.1 </para>
+</simplesect>
+<simplesect kind="date"><para>06/01/2023</para>
+</simplesect>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">nMarker</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>number of markers to detect</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+Subscribes to: <linebreak/>
+<itemizedlist>
+<listitem><para>/camera/rgb/image_raw</para>
+</listitem><listitem><para>/camera/camera_turn</para>
+</listitem></itemizedlist>
+</para>
+<para>Publishes to: <linebreak/>
+<itemizedlist>
+<listitem><para>/camera/camera_command</para>
+</listitem><listitem><para>/map/statement</para>
+</listitem></itemizedlist>
+</para>
+<para>Client of: <linebreak/>
+<itemizedlist>
+<listitem><para>/room_info</para>
+</listitem><listitem><para>/info/set_room_position</para>
+</listitem></itemizedlist>
+</para>
+<para>Description :</para>
+<para>Node to detect markers around the robot by moving the camera. It request to the marker_server node to know the markrer meaning, and publishes the received informations to the nodes state_machine and rosbot_state. </para>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"></codeline>
+<codeline lineno="30"><highlight class="preprocessor">#include<sp/>&lt;ros/ros.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="31"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;cv_bridge/cv_bridge.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="32"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;opencv2/highgui/highgui.hpp&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="33"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;aruco/aruco.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="34"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;patrolling_robot/MoveCamera.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="35"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;std_msgs/Bool.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="36"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;patrolling_robot/RoomConnection.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="37"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;patrolling_robot/RoomInformation.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="38"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;patrolling_robot/SetRoomPosition.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="39"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;surveillance_robot/Statement.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="40"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;boost/optional.hpp&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="41"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;mutex&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="42"><highlight class="normal"></highlight></codeline>
+<codeline lineno="44"><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::string<sp/>c_opencvWindow<sp/>=<sp/></highlight><highlight class="stringliteral">&quot;Image<sp/>window&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="45"><highlight class="normal"></highlight></codeline>
+<codeline lineno="60" refid="class_find_marker" refkind="compound"><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="class_find_marker" kindref="compound">FindMarker</ref><sp/>{</highlight></codeline>
+<codeline lineno="61"><highlight class="normal"></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="62"><highlight class="normal"><sp/><sp/>ros::NodeHandle<sp/>nh;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="63"><highlight class="normal"><sp/><sp/>ros::Subscriber<sp/>imageSub;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="64"><highlight class="normal"><sp/><sp/>ros::Subscriber<sp/>turnSub;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="65"><highlight class="normal"><sp/><sp/>ros::Publisher<sp/>moveCamPub;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="66"><highlight class="normal"><sp/><sp/>ros::Publisher<sp/>statPub;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="67"><highlight class="normal"><sp/><sp/>ros::ServiceClient<sp/>markerCli;<sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="68"><highlight class="normal"><sp/><sp/>ros::ServiceClient<sp/>roomCli;<sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="69"><highlight class="normal"><sp/><sp/>ros::Timer<sp/>timerPublishStatement;<sp/></highlight></codeline>
+<codeline lineno="70"><highlight class="normal"><sp/><sp/>aruco::MarkerDetector<sp/>md;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="71"><highlight class="normal"><sp/><sp/>std::vector&lt;int&gt;<sp/>markersDetected;<sp/></highlight></codeline>
+<codeline lineno="72"><highlight class="normal"><sp/><sp/>std::mutex<sp/>mutex;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="73"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>turn<sp/>=<sp/>0;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="74"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>nMarker<sp/>=<sp/>0;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="75"><highlight class="normal"></highlight></codeline>
+<codeline lineno="76"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="77"><highlight class="normal"><sp/><sp/>std::vector&lt;std::pair&lt;std::string,<sp/>std::string&gt;&gt;<sp/><ref refid="class_find_marker_1a9e1da6c7f79c636eb996a8ae3edcf69a" kindref="member">statPairVec</ref>;<sp/></highlight></codeline>
+<codeline lineno="78"><highlight class="normal"></highlight></codeline>
+<codeline lineno="85"><highlight class="normal"><sp/><sp/><ref refid="class_find_marker_1a353834808a2bac40e8f50af8ec1b2ccf" kindref="member">FindMarker</ref>()<sp/>{</highlight></codeline>
+<codeline lineno="86"><highlight class="normal"><sp/><sp/><sp/><sp/>ros::param::get(</highlight><highlight class="stringliteral">&quot;env/marker_number&quot;</highlight><highlight class="normal">,<sp/>nMarker);</highlight></codeline>
+<codeline lineno="87"><highlight class="normal"><sp/><sp/><sp/><sp/>ROS_INFO(</highlight><highlight class="stringliteral">&quot;@find_markers:<sp/>The<sp/>markers<sp/>to<sp/>detect:<sp/>%d&quot;</highlight><highlight class="normal">,<sp/>nMarker);</highlight></codeline>
+<codeline lineno="88"><highlight class="normal"></highlight></codeline>
+<codeline lineno="89"><highlight class="normal"><sp/><sp/><sp/><sp/>md.setDictionary(</highlight><highlight class="stringliteral">&quot;ARUCO&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="90"><highlight class="normal"><sp/><sp/><sp/><sp/>ROS_INFO(</highlight><highlight class="stringliteral">&quot;@find_markers:<sp/>Set<sp/>dictionary<sp/>&apos;ARUCO&apos;<sp/>to<sp/>detect<sp/>markers.&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="91"><highlight class="normal"></highlight></codeline>
+<codeline lineno="92"><highlight class="normal"><sp/><sp/><sp/><sp/>imageSub<sp/><sp/><sp/>=<sp/>nh.subscribe(</highlight><highlight class="stringliteral">&quot;/camera/rgb/image_raw&quot;</highlight><highlight class="normal">,<sp/>10,<sp/>&amp;<ref refid="class_find_marker_1ad386aaf259ced2cf6a73032a6b9fb093" kindref="member">FindMarker::ImageCb</ref>,<sp/></highlight><highlight class="keyword">this</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="93"><highlight class="normal"><sp/><sp/><sp/><sp/>turnSub<sp/><sp/><sp/><sp/>=<sp/>nh.subscribe(</highlight><highlight class="stringliteral">&quot;/camera/camera_turn&quot;</highlight><highlight class="normal">,<sp/>10,<sp/>&amp;<ref refid="class_find_marker_1aad4858c0d305ed6ba7ed4757a21ea8f2" kindref="member">FindMarker::TurnCb</ref>,<sp/></highlight><highlight class="keyword">this</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="94"><highlight class="normal"><sp/><sp/><sp/><sp/>moveCamPub<sp/>=<sp/>nh.advertise&lt;patrolling_robot::MoveCamera&gt;(</highlight><highlight class="stringliteral">&quot;/camera/camera_command&quot;</highlight><highlight class="normal">,10);</highlight></codeline>
+<codeline lineno="95"><highlight class="normal"><sp/><sp/><sp/><sp/>statPub<sp/><sp/><sp/><sp/>=<sp/>nh.advertise&lt;surveillance_robot::Statement&gt;(</highlight><highlight class="stringliteral">&quot;/map/statement&quot;</highlight><highlight class="normal">,10);</highlight></codeline>
+<codeline lineno="96"><highlight class="normal"><sp/><sp/><sp/><sp/>markerCli<sp/><sp/>=<sp/>nh.serviceClient&lt;patrolling_robot::RoomInformation&gt;(</highlight><highlight class="stringliteral">&quot;/room_info&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="97"><highlight class="normal"><sp/><sp/><sp/><sp/>roomCli<sp/><sp/><sp/><sp/>=<sp/>nh.serviceClient&lt;patrolling_robot::SetRoomPosition&gt;(</highlight><highlight class="stringliteral">&quot;/info/set_room_position&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="98"><highlight class="normal"></highlight></codeline>
+<codeline lineno="99"><highlight class="normal"><sp/><sp/><sp/><sp/>timerPublishStatement<sp/>=<sp/>nh.createTimer(ros::Duration(1.0<sp/>/<sp/>10.0),<sp/>std::bind(&amp;<ref refid="class_find_marker_1a9e117009cc5f8737a8490bd792a5595e" kindref="member">FindMarker::PublishStatement</ref>,<sp/></highlight><highlight class="keyword">this</highlight><highlight class="normal">));</highlight></codeline>
+<codeline lineno="100"><highlight class="normal"></highlight></codeline>
+<codeline lineno="101"><highlight class="normal"><sp/><sp/><sp/><sp/>cv::namedWindow(c_opencvWindow);</highlight></codeline>
+<codeline lineno="102"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="103"><highlight class="normal"></highlight></codeline>
+<codeline lineno="109"><highlight class="normal"><sp/><sp/><ref refid="class_find_marker_1a4f028f5ac957a280ad45305ef4784a91" kindref="member">~FindMarker</ref>()<sp/>{</highlight></codeline>
+<codeline lineno="110"><highlight class="normal"><sp/><sp/><sp/><sp/>cv::destroyWindow(c_opencvWindow);</highlight></codeline>
+<codeline lineno="111"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="112"><highlight class="normal"></highlight></codeline>
+<codeline lineno="123"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="class_find_marker_1ad386aaf259ced2cf6a73032a6b9fb093" kindref="member">ImageCb</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>sensor_msgs::ImageConstPtr&amp;<sp/>imageFeed)<sp/>{</highlight></codeline>
+<codeline lineno="124"><highlight class="normal"><sp/><sp/><sp/><sp/>cv_bridge::CvImagePtr<sp/>cvPtr;</highlight></codeline>
+<codeline lineno="125"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">try</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="126"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>cvPtr<sp/>=<sp/>cv_bridge::toCvCopy(imageFeed,<sp/>sensor_msgs::image_encodings::BGR8);</highlight></codeline>
+<codeline lineno="127"><highlight class="normal"><sp/><sp/><sp/><sp/>}<sp/></highlight><highlight class="keywordflow">catch</highlight><highlight class="normal"><sp/>(cv_bridge::Exception&amp;<sp/>e)<sp/>{</highlight></codeline>
+<codeline lineno="128"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>ROS_ERROR(</highlight><highlight class="stringliteral">&quot;@find_markers:<sp/>cv_bridge<sp/>exception:<sp/>%s&quot;</highlight><highlight class="normal">,<sp/>e.what());</highlight></codeline>
+<codeline lineno="129"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="130"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="131"><highlight class="normal"></highlight></codeline>
+<codeline lineno="132"><highlight class="normal"><sp/><sp/><sp/><sp/>std::vector&lt;aruco::Marker&gt;<sp/>markers<sp/>=<sp/>md.detect(cvPtr-&gt;image);</highlight></codeline>
+<codeline lineno="133"><highlight class="normal"></highlight></codeline>
+<codeline lineno="134"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal">(<sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>i=0;<sp/>i<sp/>&lt;<sp/>markers.size();<sp/>i++<sp/>)<sp/>{</highlight></codeline>
+<codeline lineno="135"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(<sp/>!std::count(markersDetected.begin(),<sp/>markersDetected.end(),<sp/>markers[i].id)<sp/>)<sp/>{</highlight></codeline>
+<codeline lineno="136"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>markersDetected.push_back(markers[i].</highlight><highlight class="keywordtype">id</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="137"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ROS_INFO(</highlight><highlight class="stringliteral">&quot;@find_markers:<sp/>Aruco<sp/>with<sp/>id<sp/>%d<sp/>detected.&quot;</highlight><highlight class="normal">,<sp/>markers[i].</highlight><highlight class="keywordtype">id</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="138"><highlight class="normal"></highlight></codeline>
+<codeline lineno="139"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>patrolling_robot::RoomInformation<sp/>infoSrv;</highlight></codeline>
+<codeline lineno="140"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>infoSrv.request.id<sp/>=<sp/>markers[i].id;</highlight></codeline>
+<codeline lineno="141"><highlight class="normal"></highlight></codeline>
+<codeline lineno="142"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(markerCli.call(infoSrv))<sp/>{</highlight></codeline>
+<codeline lineno="143"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>mutex.lock();</highlight></codeline>
+<codeline lineno="144"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(<sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>j=0;<sp/>j<sp/>&lt;<sp/>infoSrv.response.connections.size();<sp/>j++<sp/>)</highlight></codeline>
+<codeline lineno="145"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="class_find_marker_1a9e1da6c7f79c636eb996a8ae3edcf69a" kindref="member">statPairVec</ref>.push_back(std::make_pair(infoSrv.response.room.c_str(),infoSrv.response.connections[j].through_door.c_str()));</highlight></codeline>
+<codeline lineno="146"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>mutex.unlock();</highlight></codeline>
+<codeline lineno="147"><highlight class="normal"></highlight></codeline>
+<codeline lineno="148"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>patrolling_robot::SetRoomPosition<sp/>roomSrv;</highlight></codeline>
+<codeline lineno="149"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>roomSrv.request.room<sp/>=<sp/>infoSrv.response.room;</highlight></codeline>
+<codeline lineno="150"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>roomSrv.request.x<sp/>=<sp/>infoSrv.response.x;</highlight></codeline>
+<codeline lineno="151"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>roomSrv.request.y<sp/>=<sp/>infoSrv.response.y;</highlight></codeline>
+<codeline lineno="152"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>roomCli.call(roomSrv);</highlight></codeline>
+<codeline lineno="153"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ROS_INFO(</highlight><highlight class="stringliteral">&quot;@find_markers:<sp/>Location<sp/>%s<sp/>is<sp/>at<sp/>coordinates<sp/>x:%f,<sp/>y:%f&quot;</highlight><highlight class="normal">,<sp/>infoSrv.response.room.c_str(),<sp/>infoSrv.response.x,<sp/>infoSrv.response.y);</highlight></codeline>
+<codeline lineno="154"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}<sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/></highlight></codeline>
+<codeline lineno="155"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ROS_WARN(</highlight><highlight class="stringliteral">&quot;@find_markers:<sp/>Marker<sp/>with<sp/>id<sp/>%d<sp/>not<sp/>found<sp/>in<sp/>the<sp/>marker_server.&quot;</highlight><highlight class="normal">,<sp/>markers[i].</highlight><highlight class="keywordtype">id</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="156"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="157"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>markers[i].draw(cvPtr-&gt;image);</highlight></codeline>
+<codeline lineno="158"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="159"><highlight class="normal"><sp/><sp/><sp/><sp/>cv::imshow(c_opencvWindow,<sp/>cvPtr-&gt;image);</highlight></codeline>
+<codeline lineno="160"><highlight class="normal"><sp/><sp/><sp/><sp/>cv::waitKey(3);</highlight></codeline>
+<codeline lineno="161"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="162"><highlight class="normal"></highlight></codeline>
+<codeline lineno="170"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="class_find_marker_1aad4858c0d305ed6ba7ed4757a21ea8f2" kindref="member">TurnCb</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std_msgs::Bool&amp;<sp/>trigger){</highlight></codeline>
+<codeline lineno="171"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(trigger.data<sp/>==<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">)</highlight></codeline>
+<codeline lineno="172"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>turn++;</highlight></codeline>
+<codeline lineno="173"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="174"><highlight class="normal"></highlight></codeline>
+<codeline lineno="183"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="class_find_marker_1a1e70ccc8dcbeedaee4fa0a2c07e7f472" kindref="member">Loop</ref>(){</highlight></codeline>
+<codeline lineno="184"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">switch</highlight><highlight class="normal"><sp/>(turn){</highlight></codeline>
+<codeline lineno="185"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">case</highlight><highlight class="normal"><sp/>0:</highlight></codeline>
+<codeline lineno="186"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="class_find_marker_1a9c631a030cd0634501116fa4480d0a26" kindref="member">CamCommand</ref>(0.8,<sp/>0.034,<sp/>0.2);</highlight></codeline>
+<codeline lineno="187"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">break</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="188"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">case</highlight><highlight class="normal"><sp/>1:</highlight></codeline>
+<codeline lineno="189"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="class_find_marker_1a9c631a030cd0634501116fa4480d0a26" kindref="member">CamCommand</ref>(0.8,<sp/>0.034,<sp/>-0.5);</highlight></codeline>
+<codeline lineno="190"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">break</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="191"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="192"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="class_find_marker_1a9c631a030cd0634501116fa4480d0a26" kindref="member">CamCommand</ref>(0.8,<sp/>0.034,<sp/>rand()/RAND_MAX<sp/>-<sp/>0.5);</highlight></codeline>
+<codeline lineno="193"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">break</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="194"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="195"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="196"><highlight class="normal"></highlight></codeline>
+<codeline lineno="207"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="class_find_marker_1a9c631a030cd0634501116fa4480d0a26" kindref="member">CamCommand</ref><sp/>(</highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>omega,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">raise</highlight><highlight class="normal">,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>pitch)<sp/>{</highlight></codeline>
+<codeline lineno="208"><highlight class="normal"><sp/><sp/><sp/><sp/>patrolling_robot::MoveCamera<sp/>moveCam;</highlight></codeline>
+<codeline lineno="209"><highlight class="normal"><sp/><sp/><sp/><sp/>moveCam.omega<sp/>=<sp/>omega;</highlight></codeline>
+<codeline lineno="210"><highlight class="normal"><sp/><sp/><sp/><sp/>moveCam.raise<sp/>=<sp/></highlight><highlight class="keyword">raise</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="211"><highlight class="normal"><sp/><sp/><sp/><sp/>moveCam.pitch<sp/>=<sp/>pitch;</highlight></codeline>
+<codeline lineno="212"><highlight class="normal"><sp/><sp/><sp/><sp/>moveCamPub.publish(moveCam);</highlight></codeline>
+<codeline lineno="213"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="214"><highlight class="normal"></highlight></codeline>
+<codeline lineno="222"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="class_find_marker_1ae82f95c5415b0a52f58c691930772b42" kindref="member">MarkersFound</ref>(){</highlight></codeline>
+<codeline lineno="223"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(markersDetected.size()<sp/>==<sp/>nMarker)</highlight></codeline>
+<codeline lineno="224"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>1;</highlight></codeline>
+<codeline lineno="225"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>0;</highlight></codeline>
+<codeline lineno="226"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="227"><highlight class="normal"></highlight></codeline>
+<codeline lineno="235"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="class_find_marker_1a9e117009cc5f8737a8490bd792a5595e" kindref="member">PublishStatement</ref>(){</highlight></codeline>
+<codeline lineno="236"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(!<ref refid="class_find_marker_1a9e1da6c7f79c636eb996a8ae3edcf69a" kindref="member">statPairVec</ref>.empty()){</highlight></codeline>
+<codeline lineno="237"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>surveillance_robot::Statement<sp/>statToSend;</highlight></codeline>
+<codeline lineno="238"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>mutex.lock();</highlight></codeline>
+<codeline lineno="239"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>statToSend.location<sp/>=<sp/><ref refid="class_find_marker_1a9e1da6c7f79c636eb996a8ae3edcf69a" kindref="member">statPairVec</ref>[0].first;</highlight></codeline>
+<codeline lineno="240"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>statToSend.door<sp/>=<sp/><ref refid="class_find_marker_1a9e1da6c7f79c636eb996a8ae3edcf69a" kindref="member">statPairVec</ref>[0].second;</highlight></codeline>
+<codeline lineno="241"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="class_find_marker_1a9e1da6c7f79c636eb996a8ae3edcf69a" kindref="member">statPairVec</ref>.erase(<ref refid="class_find_marker_1a9e1da6c7f79c636eb996a8ae3edcf69a" kindref="member">statPairVec</ref>.begin());</highlight></codeline>
+<codeline lineno="242"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>mutex.unlock();</highlight></codeline>
+<codeline lineno="243"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>statToSend.stamp<sp/>=<sp/>ros::Time::now();</highlight></codeline>
+<codeline lineno="244"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>statPub.publish(statToSend);</highlight></codeline>
+<codeline lineno="245"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="246"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="247"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="248"><highlight class="normal"></highlight></codeline>
+<codeline lineno="267"><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="find__markers_8cpp_1a3c04138a5bfe5d72780bb7e82a18e627" kindref="member">main</ref>(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>argc,<sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal">**<sp/>argv)<sp/>{</highlight></codeline>
+<codeline lineno="268"><highlight class="normal"><sp/><sp/>ros::init(argc,<sp/>argv,<sp/></highlight><highlight class="stringliteral">&quot;find_markers&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="269"><highlight class="normal"><sp/><sp/><ref refid="class_find_marker" kindref="compound">FindMarker</ref><sp/>fm;</highlight></codeline>
+<codeline lineno="270"><highlight class="normal"><sp/><sp/>ros::Duration(4).sleep();</highlight></codeline>
+<codeline lineno="271"><highlight class="normal"><sp/><sp/>ros::Rate<sp/>loop_rate(100);</highlight></codeline>
+<codeline lineno="272"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">while</highlight><highlight class="normal"><sp/>(!fm.<ref refid="class_find_marker_1ae82f95c5415b0a52f58c691930772b42" kindref="member">MarkersFound</ref>()){</highlight></codeline>
+<codeline lineno="273"><highlight class="normal"><sp/><sp/><sp/><sp/>fm.<ref refid="class_find_marker_1a1e70ccc8dcbeedaee4fa0a2c07e7f472" kindref="member">Loop</ref>();</highlight></codeline>
+<codeline lineno="274"><highlight class="normal"><sp/><sp/><sp/><sp/>ros::spinOnce();</highlight></codeline>
+<codeline lineno="275"><highlight class="normal"><sp/><sp/><sp/><sp/>loop_rate.sleep();</highlight></codeline>
+<codeline lineno="276"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="277"><highlight class="normal"><sp/><sp/>fm.<ref refid="class_find_marker_1a9c631a030cd0634501116fa4480d0a26" kindref="member">CamCommand</ref>(0.0,<sp/>0.0,<sp/>0.0);</highlight></codeline>
+<codeline lineno="278"><highlight class="normal"><sp/><sp/>fm.<ref refid="class_find_marker_1a9e1da6c7f79c636eb996a8ae3edcf69a" kindref="member">statPairVec</ref>.push_back(std::make_pair(</highlight><highlight class="stringliteral">&quot;&quot;</highlight><highlight class="normal">,</highlight><highlight class="stringliteral">&quot;&quot;</highlight><highlight class="normal">));</highlight></codeline>
+<codeline lineno="279"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">while</highlight><highlight class="normal">(!fm.<ref refid="class_find_marker_1a9e1da6c7f79c636eb996a8ae3edcf69a" kindref="member">statPairVec</ref>.empty())<sp/>{</highlight></codeline>
+<codeline lineno="280"><highlight class="normal"><sp/><sp/><sp/><sp/>ros::spinOnce();</highlight></codeline>
+<codeline lineno="281"><highlight class="normal"><sp/><sp/><sp/><sp/>loop_rate.sleep();</highlight></codeline>
+<codeline lineno="282"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="283"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>0;</highlight></codeline>
+<codeline lineno="284"><highlight class="normal">}</highlight></codeline>
+    </programlisting>
+    <location file="/root/ros_ws/src/patrolling_robot/src/find_markers.cpp"/>
+  </compounddef>
+</doxygen>

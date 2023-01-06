@@ -1,0 +1,216 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="class_move_camera" kind="class" language="C++" prot="public">
+    <compoundname>MoveCamera</compoundname>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="class_move_camera_1a06ab6901b91d4b60a50a55b8abdead6a" prot="private" static="no" mutable="no">
+        <type>ros::NodeHandle</type>
+        <definition>ros::NodeHandle MoveCamera::nh</definition>
+        <argsstring></argsstring>
+        <name>nh</name>
+        <briefdescription>
+<para>ROS node handle. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/root/ros_ws/src/patrolling_robot/src/move_camera.cpp" line="44" column="19" bodyfile="/root/ros_ws/src/patrolling_robot/src/move_camera.cpp" bodystart="44" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_move_camera_1a34087b5458a5c75b6a77d5ab12245678" prot="private" static="no" mutable="no">
+        <type>ros::Subscriber</type>
+        <definition>ros::Subscriber MoveCamera::commandSub</definition>
+        <argsstring></argsstring>
+        <name>commandSub</name>
+        <briefdescription>
+<para>Subscriber for camera movement commands. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/root/ros_ws/src/patrolling_robot/src/move_camera.cpp" line="45" column="19" bodyfile="/root/ros_ws/src/patrolling_robot/src/move_camera.cpp" bodystart="45" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_move_camera_1a97473afe3dd912a71b6c5d624ebdd674" prot="private" static="no" mutable="no">
+        <type>ros::Subscriber</type>
+        <definition>ros::Subscriber MoveCamera::jointSub</definition>
+        <argsstring></argsstring>
+        <name>jointSub</name>
+        <briefdescription>
+<para>Subscriber for joint state information. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/root/ros_ws/src/patrolling_robot/src/move_camera.cpp" line="46" column="19" bodyfile="/root/ros_ws/src/patrolling_robot/src/move_camera.cpp" bodystart="46" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_move_camera_1a4d41e788a9bfc9545cfc66e562dc2497" prot="private" static="no" mutable="no">
+        <type>ros::Publisher</type>
+        <definition>ros::Publisher MoveCamera::rotatePub</definition>
+        <argsstring></argsstring>
+        <name>rotatePub</name>
+        <briefdescription>
+<para>Publisher for rotating the camera. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/root/ros_ws/src/patrolling_robot/src/move_camera.cpp" line="47" column="18" bodyfile="/root/ros_ws/src/patrolling_robot/src/move_camera.cpp" bodystart="47" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_move_camera_1ab5c53c6cd9f33c7f93875c91c1ad1b0c" prot="private" static="no" mutable="no">
+        <type>ros::Publisher</type>
+        <definition>ros::Publisher MoveCamera::raisePub</definition>
+        <argsstring></argsstring>
+        <name>raisePub</name>
+        <briefdescription>
+<para>Publisher for raising or lowering the camera. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/root/ros_ws/src/patrolling_robot/src/move_camera.cpp" line="48" column="18" bodyfile="/root/ros_ws/src/patrolling_robot/src/move_camera.cpp" bodystart="48" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_move_camera_1a54c459ce231cb8bd676cbc781450d3b3" prot="private" static="no" mutable="no">
+        <type>ros::Publisher</type>
+        <definition>ros::Publisher MoveCamera::pitchPub</definition>
+        <argsstring></argsstring>
+        <name>pitchPub</name>
+        <briefdescription>
+<para>Publisher for changing the pitch of the camera. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/root/ros_ws/src/patrolling_robot/src/move_camera.cpp" line="49" column="18" bodyfile="/root/ros_ws/src/patrolling_robot/src/move_camera.cpp" bodystart="49" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_move_camera_1a2b4a9de46cbc7323519d2a601f85611b" prot="private" static="no" mutable="no">
+        <type>ros::Publisher</type>
+        <definition>ros::Publisher MoveCamera::turnPub</definition>
+        <argsstring></argsstring>
+        <name>turnPub</name>
+        <briefdescription>
+<para>Publisher to trigger when the camera has completed a full rotation. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/root/ros_ws/src/patrolling_robot/src/move_camera.cpp" line="50" column="18" bodyfile="/root/ros_ws/src/patrolling_robot/src/move_camera.cpp" bodystart="50" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_move_camera_1aae71031c71ce75f7ee52181c0ec7cea7" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool MoveCamera::turn</definition>
+        <argsstring></argsstring>
+        <name>turn</name>
+        <initializer>= 0</initializer>
+        <briefdescription>
+<para>Used for avoid repeating to trigger the turn topic. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/root/ros_ws/src/patrolling_robot/src/move_camera.cpp" line="51" column="8" bodyfile="/root/ros_ws/src/patrolling_robot/src/move_camera.cpp" bodystart="51" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="class_move_camera_1a22eaf4579fd2cf3be091ec1c18c1fc4b" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>MoveCamera::MoveCamera</definition>
+        <argsstring>()</argsstring>
+        <name>MoveCamera</name>
+        <briefdescription>
+<para>Constructor for the <ref refid="class_move_camera" kindref="compound">MoveCamera</ref> class. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Initializes the subscribers and publishers for the ROS node. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/root/ros_ws/src/patrolling_robot/src/move_camera.cpp" line="59" column="3" bodyfile="/root/ros_ws/src/patrolling_robot/src/move_camera.cpp" bodystart="59" bodyend="67"/>
+      </memberdef>
+      <memberdef kind="function" id="class_move_camera_1a37a697910702a59fecc14d61759ed269" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void MoveCamera::CamCb</definition>
+        <argsstring>(const patrolling_robot::MoveCamera command)</argsstring>
+        <name>CamCb</name>
+        <param>
+          <type>const patrolling_robot::MoveCamera</type>
+          <declname>command</declname>
+        </param>
+        <briefdescription>
+<para>Callback function for the camera movement command subscriber. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>This function is called when the &quot;/camera/camera_command&quot; topic receives a message of type &quot;MoveCamera&quot;. It extracts the values for omega, raise, and pitch from the message and publishes them to the appropriate topics.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>command</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A message of type &quot;MoveCamera&quot; containing the camera movement command. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/root/ros_ws/src/patrolling_robot/src/move_camera.cpp" line="77" column="8" bodyfile="/root/ros_ws/src/patrolling_robot/src/move_camera.cpp" bodystart="77" bodyend="90"/>
+      </memberdef>
+      <memberdef kind="function" id="class_move_camera_1a9869cc6bcfb5d5ca46e09919cc7dfec2" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void MoveCamera::TurnCb</definition>
+        <argsstring>(const sensor_msgs::JointState state)</argsstring>
+        <name>TurnCb</name>
+        <param>
+          <type>const sensor_msgs::JointState</type>
+          <declname>state</declname>
+        </param>
+        <briefdescription>
+<para>Callback function for the joint state subscriber. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>This function is called when a message is received on the &quot;/joint_states&quot; topic. It checks the value of the position of the seventh joint (yawl). If it is a multiple of 2pi, it publishes on the turnPub, to advertise that the camera performed a full rotation.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>state</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A message of type &quot;JointState&quot; containing the joint state information. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/root/ros_ws/src/patrolling_robot/src/move_camera.cpp" line="101" column="8" bodyfile="/root/ros_ws/src/patrolling_robot/src/move_camera.cpp" bodystart="101" bodyend="114"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>This class provides a ROS node for moving the camera. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>This class is able to publish the commands to the joints to move the camera, and to detect if the yawl_joint has made a full turn. </para>
+    </detaileddescription>
+    <location file="/root/ros_ws/src/patrolling_robot/src/move_camera.cpp" line="43" column="1" bodyfile="/root/ros_ws/src/patrolling_robot/src/move_camera.cpp" bodystart="42" bodyend="115"/>
+    <listofallmembers>
+      <member refid="class_move_camera_1a37a697910702a59fecc14d61759ed269" prot="public" virt="non-virtual"><scope>MoveCamera</scope><name>CamCb</name></member>
+      <member refid="class_move_camera_1a34087b5458a5c75b6a77d5ab12245678" prot="private" virt="non-virtual"><scope>MoveCamera</scope><name>commandSub</name></member>
+      <member refid="class_move_camera_1a97473afe3dd912a71b6c5d624ebdd674" prot="private" virt="non-virtual"><scope>MoveCamera</scope><name>jointSub</name></member>
+      <member refid="class_move_camera_1a22eaf4579fd2cf3be091ec1c18c1fc4b" prot="public" virt="non-virtual"><scope>MoveCamera</scope><name>MoveCamera</name></member>
+      <member refid="class_move_camera_1a06ab6901b91d4b60a50a55b8abdead6a" prot="private" virt="non-virtual"><scope>MoveCamera</scope><name>nh</name></member>
+      <member refid="class_move_camera_1a54c459ce231cb8bd676cbc781450d3b3" prot="private" virt="non-virtual"><scope>MoveCamera</scope><name>pitchPub</name></member>
+      <member refid="class_move_camera_1ab5c53c6cd9f33c7f93875c91c1ad1b0c" prot="private" virt="non-virtual"><scope>MoveCamera</scope><name>raisePub</name></member>
+      <member refid="class_move_camera_1a4d41e788a9bfc9545cfc66e562dc2497" prot="private" virt="non-virtual"><scope>MoveCamera</scope><name>rotatePub</name></member>
+      <member refid="class_move_camera_1aae71031c71ce75f7ee52181c0ec7cea7" prot="private" virt="non-virtual"><scope>MoveCamera</scope><name>turn</name></member>
+      <member refid="class_move_camera_1a9869cc6bcfb5d5ca46e09919cc7dfec2" prot="public" virt="non-virtual"><scope>MoveCamera</scope><name>TurnCb</name></member>
+      <member refid="class_move_camera_1a2b4a9de46cbc7323519d2a601f85611b" prot="private" virt="non-virtual"><scope>MoveCamera</scope><name>turnPub</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>
