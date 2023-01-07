@@ -50,9 +50,18 @@ Here you can see the difference between the detection of ARUCO markers with blac
 
 <img src="https://github.com/ettore9x9/patrolling_robot/blob/main/media/aruco_black.png" width="300"> <img src="https://github.com/ettore9x9/patrolling_robot/blob/main/media/aruco_white.png" width="300">
 
-### Robot's model ###
+### Robot model ###
+
+This is the robot model used in the assignment:
 
 <img src="https://github.com/ettore9x9/patrolling_robot/blob/main/media/rosbot_model.png" width="200">
+
+It is based on the [rosbot2](https://github.com/Marslanali/husarion-rosbot-2-gazebo-simulation/tree/master/rosbot_description) robot, which provides the commercial rosbot2 equipped with a laser scanner and an RGB-D camera. For the assignment's goal, the robot must detect all the markers *without* moving the base. For this reason, the starting model has been changed with:
+ - yawl joint: a continuous joint controlled in velocity to rotate the camera.
+ - vertical joint: a prismatic joint that allows the camera to move up and down, controlled in position.
+ - pitch joint: a rotational joint that allows the pitch motion of the camera, controlled in position.
+ 
+Every PID controller's joint has been tuned manually, and the values are stored in the [config/move_camera_config.yaml](config/move_camera_config.yaml) file.
 
 ### Assumptions ###
 
