@@ -48,7 +48,11 @@ This is because a white border increases the contrast between the marker and its
 
 Here you can see the difference between the detection of ARUCO markers with black or white boxes:
 
-<img src="https://github.com/ettore9x9/patrolling_robot/blob/main/media/aruco_black.png" width="300"> <img src="https://github.com/ettore9x9/patrolling_robot/blob/main/media/aruco_white.png" width="300">  
+<img src="https://github.com/ettore9x9/patrolling_robot/blob/main/media/aruco_black.png" width="300"> <img src="https://github.com/ettore9x9/patrolling_robot/blob/main/media/aruco_white.png" width="300">
+
+### Robot's model ###
+
+<img src="https://github.com/ettore9x9/patrolling_robot/blob/main/media/rosbot_model.png" width="200">
 
 ### Assumptions ###
 
@@ -105,59 +109,49 @@ For building interfaces between nodes, in this package there are some custom mes
 ### Package List
 
 This repository contains a ROS package named `patrolling_robot` that includes the following resources:
+ - [config/](config/): RViz and controllers configurations.
+    - [move_camera_config.yaml](config/move_camera_config.yaml): configuration file for the joint state controller and for all the joint controllers added to the robot.
+    - [sim.rviz](config/sim.rviz): configuration file for RViz.
+ - [docs/](docs/): it contains the documentation source.
+ - [launch/](launch/): it ontains the launchfiles to launch this package.
+    - [gazebo_environment.launch](launch/launchgazebo_environment.launch): launcher for the GAZEBO environment with the robot and the world loaded.
+    - [move_base.launch](launch/move_base.launch): launcher for the move_base node.
+    - [patrolling_robot.launch](launch/patrolling_robot.launch): global launcher of the node.
+    - [simulation_gmapping.launch](launch/simulation_gmapping.launch): launcher of the mapping algorithm.
+ - [media/](media/): it contains all images, gifs, videos, and diagrams of this readme.
+ - [meshes/](meshes/): it contains the meshes of the robot's urdf.
+ - [msg/](msg/): it contains messages exchanged through ROS topics.
+    - [MoveCamera.msg](msg/MoveCamera.msg): message to command the movements of the camera.
+    - [RoomConnection.msg](msg/RoomConnection.msg): message to build the semantic of the environment.
+ - [param/](param/): it stores the parameters of the architecture.
+    - [base_local_planner_params.yaml](param/base_local_planner_params.yaml): parameters of the local planner.
+    - [costmap_common_params.yaml](param/costmap_common_params.yaml): parameters for both the global and local costmap.
+    - [global_costmap_params.yaml](param/global_costmap_params.yaml): parameters for the global costmap.
+    - [local_costmap_params.yaml](param/local_costmap_params.yaml): parameters for the local costmap.
+    - [move_base_params.yaml](param/move_base_params.yaml): parameters for the move_base node.
+ - [scripts/](scripts/): it contains the implementation of the python software components.
+    - [controller.py](scripts/controller.py): module to implement the controller node, to make the robot reach the goal.
+    - [planner.py](scripts/planner.py): module to implement the planner node, to generate a list of waypoints.
+    - [rosbot_state.py](scripts/rosbot_state.py): module to implement the rosbot_state node, to store the robot's and locations' positions.
+ - [src/](src/): it contains the implementation of the c++ software components.
+    - [find_markers.cpp](src/find_markers.cpp): module to implement the find_marker node, to search for markers around the robot.
+    - [marker_server.cpp](src/marker_server.cpp): module to retrieve informations from markers' id.
+    - [move_camera.cpp](src/move_camera.cpp): module to make the camera movements easier.
+ - [srv/](srv/): it contains the custom ROS services.
+    - [SetRoomPosition.srv](srv/SetRoomPosition.srv): service to tell the position of the room.
+    - [RoomInformation.srv](srv/RoomInformation.srv): service to retrieve informations about a marker id.
+    - [AskPosition.srv](srv/AskPosition.srv): service to ask the position of an element(location or robot).
+ - [urdf/](urdf/): it conteins the robot model.
+    - [macros.xacro](urdf/macros.xacro): xacro file for building the robot's model.
+    - [materials.xacro](urdf/materials.xacro): xacro file for the materials of the robot's model.
+    - [rosbot.gazebo](urdf/rosbot.gazebo): file for showing and controlling the robot on gazebo.
+    - [rosbot.xacro](urdf/rosbot.xacro): xacro file for the urdf model of the rosbot2.
+    - [rosbot_modified.xacro](urdf/rosbot.xacro): xacro file for the urdf of the rosbot with some links and joints to move the camera.
+ - [worlds/](worlds/): it contains the GAZEBO world.
+    - [assignment_world.world](worlds/assignment_world.world): original world of the assignment.
+    - [assignment_world2.world](worlds/assignment_world2.world): world with white boxes behind ARUCO markers.
  - [CMakeList.txt](CMakeList.txt): File to configure this package.
  - [package.xml](package.xml): File to configure this package.
- - [config/](config/):
-    -
-    -
-    -
-    -
- - [launch/](launch/): Contains the launchfiles to launch this package.
-    - [gazebo_environment.launch](launchgazebo_environment.launch):
-    - [move_base.launch](launch/move_base.launch): 
-    - [patrolling_robot.launch](launch/patrolling_robot.launch): 
-    - [simulation_gmapping.launch](launch/simulation_gmapping.launch): 
- - [meshes/](meshes/):
-    -
-    -
-    -
-    -
-    -
- - [msg/](msg/): It contains messages exchanged through ROS topics.
-    - [MoveCamera.msg](msg/MoveCamera.msg): 
-    - [RoomConnection.msg](msg/RoomConnection.msg): 
- - [param/](param/):
-    - 
-    -
-    -
-    -
-    -
- - [srv/](srv/):
-    - [SetRoomPosition.srv](srv/SetRoomPosition.srv):
-    - [RoomInformation.srv](srv/RoomInformation.srv):
-    - [AskPosition.srv](srv/AskPosition.srv):
- - [src/](src/):
-    - [find_markers.cpp](src/find_markers.cpp):
-    - [marker_server.cpp](src/marker_server.cpp):
-    - [move_camera.cpp](src/move_camera.cpp):
- - [scripts/](scripts/): 
-    - [rosbot_state.py](scripts/rosbot_state.py): 
-    - [planner.py](scripts/planner.py): 
-    - [controller.py](scripts/controller.py): 
- - [media/](media/):
- - [docs/](docs/): It contains the documentation source.
- - [topological_map](topological_map/): It contains the starting topological map of the environment.
-    - 
-    -
-    -
-    -
-    -
- - [urdf/](urdf/):
-    - 
-    -
-    -
-    -
-    -
 
 ### Dependencies ###
 
