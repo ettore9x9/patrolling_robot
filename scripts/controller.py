@@ -75,7 +75,7 @@ class ControllingAction(object):
                 self._as.set_preempted()
                 return
             # Wait before to reach the following via point.
-            self.reach_goal(point.x, point.y)
+            self.ReachGoal(point.x, point.y)
 
             # Publish a feedback to the client to simulate that a via point has been reached. 
             feedback.reached_point = point

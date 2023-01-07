@@ -2,7 +2,11 @@
     <include file="$(find patrolling_robot)/launch/gazebo_environment.launch"/>
     <include file="$(find patrolling_robot)/launch/simulation_gmapping.launch"/>
     <include file="$(find patrolling_robot)/launch/move_base.launch"/>
-    <include file="$(find patrolling_robot)/launch/load_params.launch"/>
+
+    <rosparam param="test/recharging_time"> 8 </rosparam>
+    <rosparam param="test/random_sense/active"> True </rosparam>
+    <rosparam param="test/random_sense/battery_time"> [120.0, 180.0] </rosparam>
+    <rosparam param="env/marker_number"> 7 </rosparam>
 
     <node pkg="armor" 
           type="execute" 
