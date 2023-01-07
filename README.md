@@ -50,6 +50,10 @@ Here you can see the difference between the detection of ARUCO markers with blac
 
 <img src="https://github.com/ettore9x9/patrolling_robot/blob/main/media/aruco_black.png" width="300"> <img src="https://github.com/ettore9x9/patrolling_robot/blob/main/media/aruco_white.png" width="300">
 
+This is the overall world in GAZEBO, where the robot must move autonomously following the assignment's specifications:
+
+<img src="https://github.com/ettore9x9/patrolling_robot/blob/main/media/gazebo_world.png" width="900">
+
 ### Robot model ###
 
 This is the robot model used in the assignment:
