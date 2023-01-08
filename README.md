@@ -265,8 +265,7 @@ It also subscribes to the */joint_states* topic and triggers the */camera/camera
 The *CamCb* function extracts the values for omega, raise, and pitch from the message and publishes them to the appropriate topics:
 
 ```c++
-  void CamCb(const patrolling_robot::MoveCamera command)
-  {
+  void CamCb(const patrolling_robot::MoveCamera command) {
   	std_msgs::Float64 omega;
   	std_msgs::Float64 raise;
   	std_msgs::Float64 pitch;
@@ -279,7 +278,6 @@ The *CamCb* function extracts the values for omega, raise, and pitch from the me
     raisePub.publish(raise);
     pitchPub.publish(pitch);
   }
-  
 ```
 
 This is an example of the node used for rotating the camera after the robot reaches a new location.
