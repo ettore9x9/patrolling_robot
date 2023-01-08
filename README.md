@@ -205,13 +205,27 @@ It follows the details of each software component implemented in this repository
 
 ### The `find_markers` Node ###
 
+
+https://user-images.githubusercontent.com/91745595/211189014-0d2dd848-6b06-4b32-93df-99dd5f0008a5.mp4
+
+
+
 ### The `move_camera` Node ###
+
+![rotate_camera](https://user-images.githubusercontent.com/91745595/211189025-92b2eaf9-9b7f-484d-8316-6cca6c1f07ec.gif)
 
 ### The `rosbot_state` Node ###
 
 ### The `planner` Node ###
 
+<img src="https://github.com/ettore9x9/patrolling_robot/blob/main/media/terminal.png" width="500">
+
 ### The `controller` Node ###
+
+<img src="https://github.com/ettore9x9/patrolling_robot/blob/main/media/rviz_map.png" width="900">
+
+https://user-images.githubusercontent.com/91745595/211189092-38e84907-6e68-49f3-9a2c-a42065d9848d.mp4
+
 
 ## Launching the Software ##
 
