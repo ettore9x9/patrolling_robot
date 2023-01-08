@@ -59,7 +59,7 @@ This is the overall world in GAZEBO, where the robot must move autonomously foll
 
 <img src="https://github.com/ettore9x9/patrolling_robot/blob/main/media/gazebo_world.png" width="900">
 
-In the world are present rooms and corridors, in particular the map is the same as the default one of the first assignment.
+In the world are present rooms and corridors, in particular, the map is the same as the default one of the first assignment.
 
 ### Robot model ###
 
@@ -85,7 +85,7 @@ The whole scenario has the following assumptions:
  - Even if the battery is low, the robot goes to the recharging location only if it is reachable; otherwise, it continues traveling into the environment.
  - If the battery goes down while building the map, the robot finishes the build and then recharges.
  - The starting and the recharging positions can be different.
- - Markers' informations match with the topology of the environment.
+ - Markers' information matches the topology of the environment.
 
 ## Software architecture ##
 
@@ -123,15 +123,15 @@ In this case, the software architecture loops until all markers are found. In ea
 ### ROS messages and actions ###
 
 For building interfaces between nodes, in this package there are some custom messages and actions:
- - `MoveCamera.msg`: raise, pitch and omega commands for changing the robot's field of view.
- - `RoomConnection.msg`: couple of strings that identifies a door and a location in the environment.
+ - `MoveCamera.msg`: raise, pitch, and omega commands for changing the robot's field of view.
+ - `RoomConnection.msg`: a couple of strings that identify a door and a location in the environment.
  - `AskPosition.srv`: `rosbot_state` interface, to ask the robot's or location's position.
    - *Request*: the name of the location or the robot.
-   - *Reply*: the x, y coordinates of the requested object in space.
+   - *Reply*: the x and y coordinates of the requested object in space.
  - `RoomInformation.srv`: it carries the meaning of a detected marker.
    - *Request*: marker id number.
-   - *Reply*: name of the room, its x and y position and a list of RoomConnection messages.
- - `SetRoomPosition.srv`: tell the `rosbot_state` whic is the position of a location.
+   - *Reply*: name of the room, its x and y position, and a list of RoomConnection messages.
+ - `SetRoomPosition.srv`: tell the `rosbot_state` which is the position of a location.
    - *Request*: room's name, and its x and y coordinates.
    - *Reply*: bool set to true when the work is completed.
 
@@ -144,7 +144,7 @@ This repository contains a ROS package named `patrolling_robot` that includes th
     - [move_camera_config.yaml](config/move_camera_config.yaml): configuration file for the *joint state controller* and for all the *joint controllers* added to the robot.
     - [sim.rviz](config/sim.rviz): configuration file for RViz.
  - [docs/](docs/): it contains the documentation source.
- - [launch/](launch/): it contains the launchfiles to launch this package.
+ - [launch/](launch/): it contains the launch files to launch this package.
     - [gazebo_environment.launch](launch/launchgazebo_environment.launch): launcher for the GAZEBO environment with the robot and the world loaded.
     - [move_base.launch](launch/move_base.launch): launcher for the move_base node.
     - [patrolling_robot.launch](launch/patrolling_robot.launch): global launcher of the node.
@@ -175,12 +175,12 @@ This repository contains a ROS package named `patrolling_robot` that includes th
  - [urdf/](urdf/): it conteins the robot model.
     - [macros.xacro](urdf/macros.xacro): xacro file for building the robot's model.
     - [materials.xacro](urdf/materials.xacro): xacro file for the materials of the robot's model.
-    - [rosbot.gazebo](urdf/rosbot.gazebo): file for showing and controlling the robot on gazebo.
+    - [rosbot.gazebo](urdf/rosbot.gazebo): file for showing and controlling the robot on GAZEBO.
     - [rosbot.xacro](urdf/rosbot.xacro): xacro file for the urdf model of the rosbot2.
     - [rosbot_modified.xacro](urdf/rosbot.xacro): xacro file for the urdf of the rosbot with some links and joints to move the camera.
  - [worlds/](worlds/): it contains the GAZEBO world.
     - [assignment_world.world](worlds/assignment_world.world): original world of the assignment.
-    - [assignment_world2.world](worlds/assignment_world2.world): world with white boxes behind ARUCO markers.
+    - [assignment_world2.world](worlds/assignment_world2.world): the world with white boxes behind ARUCO markers.
  - [CMakeList.txt](CMakeList.txt): File to configure this package.
  - [package.xml](package.xml): File to configure this package.
 
@@ -206,8 +206,8 @@ It follows the details of each software component implemented in this repository
 ### The `find_markers` Node ###
 
 The `find_markers` Node is able to find Aruco markers around the robot. It subscribes to image and turn data, processes the data to detect markers, and publishes the results.
-It publishes to the `move_camera` node to let the markers enter in the field of view of the camera, more in details, the method *Loop* is used to decide how the camera must move and the method *CamCommand* is used for sending the camera commands.
-Depending on the variable *turn*, which identify the number of rotations around the z axis of the camera, this method set different camera's orientations.
+It publishes to the `move_camera` node to let the markers enter the field of view of the camera, more in detail, the method *Loop* is used to decide how the camera must move and the method *CamCommand* is used for sending the camera commands.
+Depending on the variable *turn*, which identifies the number of rotations around the z-axis of the camera, this method set different camera orientations.
 Hopefully, after one rotation looking downward and one rotation upward, all markers are detected. If not, the pitch angle is set randomically.
 
 ```c++
@@ -244,14 +244,14 @@ This is the code for the asynchronous publisher:
   }
   ```
 Where the global variable `statPairVec` is a vector of pairs of status information. 
-The first element is the location, the second the door.
+The first element is the location, and the second is the door.
 This variable is shared and asynchronously accessed, so it must be protected by a mutex.
   
 This node also calls the `set_room_position` server to store the x y positions of each room.
 
-Anyway, the principal function of this code is the callback to the image topic `ImageCb`: it processes the image data to detect markers, and stores the detected one IDs in the *markersDetected* vector. It also calls the `marker_server` and `set_room_position` services, and displays the image with the detected markers on the OpenCV window.
+Anyway, the principal function of this code is the callback to the image topic `ImageCb`: it processes the image data to detect markers, and stores the detected id in the *markersDetected* vector. It also calls the `marker_server` and `set_room_position` services and displays the image with the detected markers on the OpenCV window.
 
-Regarding the marker detection, it uses the *OpenCV ROS Bridge* to transform the ROS image to an OpenCV image, then detects the markers with the *ARUCO MarkerDetector*.
+Regarding marker detection, it uses the *OpenCV ROS Bridge* to transform the ROS image to an OpenCV image, then detects the markers with the *ARUCO MarkerDetector*.
 
 This is an example of the `find_markers` behavior, showing also the `state_machine` node storing the statements on the ontology.
 
@@ -260,7 +260,7 @@ https://user-images.githubusercontent.com/91745595/211189014-0d2dd848-6b06-4b32-
 ### The `move_camera` Node ###
 
 The `move_camera` Node is an adapter from the *camera/camera_command* topic to all the topics needed for moving each joint of the robot.
-It also subscribes to the */joint_states* topic, and triggers the */camera/camera_turn* whenever the camera completed a full rotation.
+It also subscribes to the */joint_states* topic and triggers the */camera/camera_turn* whenever the camera completed a full rotation.
 
 The *CamCb* function extracts the values for omega, raise, and pitch from the message and publishes them to the appropriate topics:
 
@@ -315,23 +315,23 @@ The `planner` Node implements a service that, provided with the goal's name, ask
 
 ### The `controller` Node ###
 
-The `controller` Node calls the move_base action service. It implements a service that, provided with a list of waypoints, asks the move_base planning, mapping and controlling algorithm to bring the robot sequencially through all of them. 
+The `controller` Node calls the move_base action service. It implements a service that, provided with a list of waypoints, asks the move_base planning, mapping, and controlling algorithm to bring the robot sequentially through all of them. 
 
-When a waypoint is reached, the robot turns the camera to look around, then starts again reaching the next waypoint, if any.
+When a waypoint is reached, the robot turns the camera to look around, then starts again to reach the next waypoint, if any.
 
-It is based on the structure of the third assignment of *Research Track 1* course, that you can find at this [GitHub](https://github.com/ettore9x9/driving_modalities.git).
+It is based on the structure of the third assignment of the *Research Track 1* course, which you can find at this [GitHub](https://github.com/ettore9x9/driving_modalities.git).
 
-For autonomously driving the robot, the program sends a goal to the action server */move_base*, receiving feedbacks and monitoring the status until the goal is reached or canceled. Thanks to the gmapping algorithm, the robot can create a map of the surrounding environment during its tours, shown it this picture:
+For autonomously driving the robot, the program sends a goal to the action server */move_base*, receiving feedback and monitoring the status until the goal is reached or canceled. Thanks to the gmapping algorithm, the robot can create a map of the surrounding environment during its tours, as shown in this picture:
 
 <img src="https://github.com/ettore9x9/patrolling_robot/blob/main/media/rviz_map.png" width="900">
 
 The move_base node implements the action server to control the robot through the shortest path to reach the given position. 
 You can find all the parameters' tuning in the folder [param/](param/).
-This is an example of the robot reaching a gol in the environment.
+This is an example of the robot reaching a goal in the environment.
 
 https://user-images.githubusercontent.com/91745595/211189092-38e84907-6e68-49f3-9a2c-a42065d9848d.mp4
 
-After reaching the goal, the robot performs a scan of the environment rotating the camera.
+After reaching the goal, the robot performs a scan of the environment by rotating the camera.
 
 ## Launching the Software ##
 
@@ -358,7 +358,7 @@ If you want to suppress the output, in particular the warnings related to the mo
 ```bash
 roslaunch patrolling_robot patrolling_robot.launch 2>/dev/null
 ```
-Or use the following command just to display the robot into the environment:
+Or use the following command just to display the robot in the environment:
 ```bash
 roslaunch patrolling_robot gazebo_environment.launch
 ```
@@ -366,7 +366,7 @@ roslaunch patrolling_robot gazebo_environment.launch
 ### ROS Parameters ###
 
 This software requires the following ROS parameters.
- - `env/marker_number`: It stores the total number of marker to detect.
+ - `env/marker_number`: It stores the total number of markers to detect.
  - `test/recharging_time`: It represents the time required for the robot to get fully charged.
  - `test/random_sense/active`: It is a boolean value that activates (i.e., `True`) or deactivates (`False`) the random-based stimulus' generation. If this parameter is `True` the parameter below is also required.  If it is `False` the parameter below is not used.
  - `test/random_sense/battery_time`: It indicates the time passed within the battery state becomes low. It should be a list of two float numbers, i.e., `[min_time, max_time]` in seconds and the time passed after the robot starts moving after a recharge will be a random value within such an interval.
@@ -380,5 +380,5 @@ These are some possible improvements to this repository:
  - When the robot has a low battery, let the architecture react immediately.
  - Implements the possibility of adding another robot.
  - Implements the possibility of having different recharging locations.
-   
+
 ---
