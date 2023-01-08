@@ -98,19 +98,27 @@ Given the scenario and the assumptions, the software architecture is developed a
 The Component diagram shows the interfaces between each node of the architecture. The light blue nodes are the ones implemented in this package.
 The `find_marker`, `planner`, and `controller` modules have the same interfaces with the `state_machine` node as in the first assignment.
 
-The `rosbot_state` component stores the positions of the locations, and keep track of the robot's position. In a first moment, it load informations through `SetRoomPosition.srv`. When needed by the `planner_node`, it shares the positions through the other service interface `AskPosition.srv`.
+The `rosbot_state` component stores the positions of the locations and keeps track of the robot's position. At the first moment, it loads information through `SetRoomPosition.srv`. When needed by the `planner_node`, it shares the positions through the other service interface `AskPosition.srv`.
 
 The `move_camera` node provides a service `MoveCamera.srv` that allows the client node to easily set commands to the joints that orient the camera.
-It is used by the `find_markers` node to search markers and by the `controller` node to rotate the camera after reaching a location, to patrol the area.
+It is used by the `find_markers` node to search markers and by the `controller` node to rotate the camera after reaching a location to patrol the area.
 
 
 ### Sequence diagram ###
 
 <img src="https://github.com/ettore9x9/patrolling_robot/blob/main/media/sequence_diagram.png" width="900">
 
+The Sequence diagram shows the flow of information between components. The main structure is inherited from the first assignment, with three more nodes: `find_markers` (instead of `find_qr`), `marker_server`, and `rosbot_state`.
+
+As we can see, the `rosbot_state` collects information about rooms' positions by the `find_marker` node and shares them in a second moment with the `planner` node.
+The `marker_server` node is used while building the semantics of the environment. The information provided is split by the `find_markers` node and stored in the ontology or in the `rosbot_state` node. The param `env/marker_number` stores the number of markers to detect; after their detection, the `find_markers` node exits. This is the transition between *phase 1* and *phase 2* above mentioned.
+
 ### States diagram ###
 
 <img src="https://github.com/ettore9x9/patrolling_robot/blob/main/media/states_diagram.png" width="900">
+
+The State diagram is very similar to the one of the first assignment; it changes only in the first phase, where there is the markers' detection.
+In this case, the software architecture loops until all markers are found. In each loop, it finds a new marker, asks the `marker_server` node the semantic meaning of the detected marker, and stores it. When all markers are detected, the `state_machine` node calls the reasoner.
 
 ### ROS messages and actions ###
 
@@ -193,8 +201,7 @@ The software dependencies are:
 
 ## Software Components
 
-It follows the details of each software component implemented in this repository, which is available
-in the `scripts/` and `srv/` folder.
+It follows the details of each software component implemented in this repository, which is available in the `scripts/` and `srv/` folders.
 
 ### The `find_markers` Node ###
 
@@ -239,7 +246,7 @@ roslaunch patrolling_robot gazebo_environment.launch
 ### ROS Parameters ###
 
 This software requires the following ROS parameters.
-
+ - `env/marker_number`: It stores the total number of marker to detect.
  - `test/recharging_time`: It represents the time required for the robot to get fully charged.
  - `test/random_sense/active`: It is a boolean value that activates (i.e., `True`) or deactivates (`False`) the random-based stimulus' generation. If this parameter is `True` the parameter below is also required.  If it is `False` the parameter below is not used.
  - `test/random_sense/battery_time`: It indicates the time passed within the battery state becomes low. It should be a list of two float numbers, i.e., `[min_time, max_time]` in seconds and the time passed after the robot starts moving after a recharge will be a random value within such an interval.
