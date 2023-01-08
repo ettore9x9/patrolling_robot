@@ -205,27 +205,133 @@ It follows the details of each software component implemented in this repository
 
 ### The `find_markers` Node ###
 
+The `find_markers` Node is able to find Aruco markers around the robot. It subscribes to image and turn data, processes the data to detect markers, and publishes the results.
+It publishes to the `move_camera` node to let the markers enter in the field of view of the camera, more in details, the method *Loop* is used to decide how the camera must move and the method *CamCommand* is used for sending the camera commands.
+Depending on the variable *turn*, which identify the number of rotations around the z axis of the camera, this method set different camera's orientations.
+Hopefully, after one rotation looking downward and one rotation upward, all markers are detected. If not, the pitch angle is set randomically.
+
+```c++
+  void Loop(){
+    switch (turn){
+    case 0:
+      CamCommand(0.8, 0.034, 0.2);
+      break;
+    case 1:
+      CamCommand(0.8, 0.034, -0.5);
+      break;
+    default:
+      CamCommand(0.8, 0.034, rand()/RAND_MAX - 0.5);
+      break;
+    }
+  }
+ ```
+  
+Moreover, it publishes asynchronously the statements to the state_machine node, because one marker detection can correspond to multiple statements.
+This is the code for the asynchronous publisher:
+
+```c++
+  void PublishStatement(){
+    if (!statPairVec.empty()){
+      surveillance_robot::Statement statToSend;
+      mutex.lock();
+      statToSend.location = statPairVec[0].first;
+      statToSend.door = statPairVec[0].second;
+      statPairVec.erase(statPairVec.begin());
+      mutex.unlock();
+      statToSend.stamp = ros::Time::now();
+      statPub.publish(statToSend);
+    }
+  }
+  ```
+Where the global variable `statPairVec` is a vector of pairs of status information. 
+The first element is the location, the second the door.
+This variable is shared and asynchronously accessed, so it must be protected by a mutex.
+  
+This node also calls the `set_room_position` server to store the x y positions of each room.
+
+Anyway, the principal function of this code is the callback to the image topic `ImageCb`: it processes the image data to detect markers, and stores the detected one IDs in the *markersDetected* vector. It also calls the `marker_server` and `set_room_position` services, and displays the image with the detected markers on the OpenCV window.
+
+Regarding the marker detection, it uses the *OpenCV ROS Bridge* to transform the ROS image to an OpenCV image, then detects the markers with the *ARUCO MarkerDetector*.
+
+This is an example of the `find_markers` behavior, showing also the `state_machine` node storing the statements on the ontology.
 
 https://user-images.githubusercontent.com/91745595/211189014-0d2dd848-6b06-4b32-93df-99dd5f0008a5.mp4
 
-
-
 ### The `move_camera` Node ###
+
+The `move_camera` Node is an adapter from the *camera/camera_command* topic to all the topics needed for moving each joint of the robot.
+It also subscribes to the */joint_states* topic, and triggers the */camera/camera_turn* whenever the camera completed a full rotation.
+
+The *CamCb* function extracts the values for omega, raise, and pitch from the message and publishes them to the appropriate topics:
+
+```c++
+  void CamCb(const patrolling_robot::MoveCamera command)
+  {
+  	std_msgs::Float64 omega;
+  	std_msgs::Float64 raise;
+  	std_msgs::Float64 pitch;
+  	
+  	omega.data = command.omega;
+  	raise.data = command.raise;
+  	pitch.data = command.pitch;
+
+    rotatePub.publish(omega);
+    raisePub.publish(raise);
+    pitchPub.publish(pitch);
+  }
+  
+```
+
+This is an example of the node used for rotating the camera after the robot reaches a new location.
 
 ![rotate_camera](https://user-images.githubusercontent.com/91745595/211189025-92b2eaf9-9b7f-484d-8316-6cca6c1f07ec.gif)
 
 ### The `rosbot_state` Node ###
 
+The `rosbot_state` Node manages the positions of rooms and the robot in the environment. 
+It provides services for adding new rooms and asking for the positions of rooms and the robot, and it listens for updates to the robot's pose and stores it.
+
+This service callback answer with the x and y position of the requested room or of the robot:
+
+```python
+def FindPosition(self, request):
+	response = AskPositionResponse()
+	if request.what == "rosbot":
+		response.x = self.robotPoseX
+		response.y = self.robotPoseY
+	else:
+		response.x = self.dictionary[request.what][0]
+		response.y = self.dictionary[request.what][1]
+	return response
+```
+
+The location's x and y positions are stored in a dictionary.
+
 ### The `planner` Node ###
+
+The `planner` Node implements a service that, provided with the goal's name, asks for the actual robot's position and for the goal location's position, and returns a list of two waypoints (start, goal).
 
 <img src="https://github.com/ettore9x9/patrolling_robot/blob/main/media/terminal.png" width="500">
 
 ### The `controller` Node ###
 
+The `controller` Node calls the move_base action service. It implements a service that, provided with a list of waypoints, asks the move_base planning, mapping and controlling algorithm to bring the robot sequencially through all of them. 
+
+When a waypoint is reached, the robot turns the camera to look around, then starts again reaching the next waypoint, if any.
+
+It is based on the structure of the third assignment of *Research Track 1* course, that you can find at this [GitHub](https://github.com/ettore9x9/driving_modalities.git).
+
+For autonomously driving the robot, the program sends a goal to the action server */move_base*, receiving feedbacks and monitoring the status until the goal is reached or canceled. Thanks to the gmapping algorithm, the robot can create a map of the surrounding environment during its tours, shown it this picture:
+
 <img src="https://github.com/ettore9x9/patrolling_robot/blob/main/media/rviz_map.png" width="900">
+
+The move_base node implements the action server to control the robot through the shortest path to reach the given position. 
+You can find all the parameters' tuning in the folder [param/](param/).
+This is an example of the robot reaching a gol in the environment.
 
 https://user-images.githubusercontent.com/91745595/211189092-38e84907-6e68-49f3-9a2c-a42065d9848d.mp4
 
+After reaching the goal, the robot performs a scan of the environment rotating the camera.
 
 ## Launching the Software ##
 
