@@ -18,6 +18,8 @@ find_package(catkin REQUIRED COMPONENTS
   sensor_msgs
   visualization_msgs
   nav_msgs
+  gazebo_ros
+  rviz
 )
 
 ## System dependencies are found with CMake's conventions
@@ -111,7 +113,7 @@ generate_messages()
 catkin_package(
 #  INCLUDE_DIRS include
   LIBRARIES aruco_ros_utils
-  CATKIN_DEPENDS roscpp rospy aruco
+  CATKIN_DEPENDS roscpp rospy aruco message_runtime
   DEPENDS OpenCv 
 )
 
@@ -152,6 +154,8 @@ include_directories(
 ## Add cmake target dependencies of the executable
 ## same as for the library above
 add_dependencies(marker_server ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
+add_dependencies(find_markers ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
+add_dependencies(move_camera ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 
 ## Specify libraries to link a library or executable target against
 target_link_libraries(marker_server
